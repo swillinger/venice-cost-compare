@@ -478,7 +478,7 @@ annual_eff_cost = total_diem_cost &times; opportunity_cost_rate
       <h2>VVV Staking</h2>
 
       <label for="vvvUsd">VVV Investment (USD)</label>
-      <input type="number" id="vvvUsd" value="10000" min="0" step="100">
+      <input type="text" id="vvvUsd" value="$10,000" inputmode="numeric" style="font-variant-numeric:tabular-nums;">
 
       <div class="auto-match">
         <input type="checkbox" id="autoMatch" checked>
@@ -801,6 +801,17 @@ function renderLiveMarketData() {
     </div>`;
 }
 
+// --- VVV USD formatting helpers ---
+function parseVvvUsd() {
+  return parseInt((document.getElementById("vvvUsd").value || "0").replace(/[^0-9]/g, "")) || 0;
+}
+function formatVvvUsd(n) {
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
+function setVvvUsd(n) {
+  document.getElementById("vvvUsd").value = formatVvvUsd(n);
+}
+
 // --- Init ---
 const modelSel = document.getElementById("model");
 Object.entries(MODELS).forEach(([k, m]) => {
@@ -814,7 +825,7 @@ const params = new URLSearchParams(location.search);
 if (params.get("m")) modelSel.value = params.get("m");
 if (params.get("i")) document.getElementById("inputMtok").value = params.get("i");
 if (params.get("o")) document.getElementById("outputMtok").value = params.get("o");
-if (params.get("v")) document.getElementById("vvvUsd").value = params.get("v");
+if (params.get("v")) setVvvUsd(parseInt(params.get("v")));
 if (params.get("a")) document.getElementById("appreciation").value = params.get("a");
 if (params.get("oc")) document.getElementById("oppCost").value = params.get("oc");
 if (params.get("apy")) document.getElementById("stakingApy").value = params.get("apy");
@@ -835,6 +846,9 @@ if (params.get("pm")) { priceMode = params.get("pm"); setPriceMode(priceMode); }
 
 document.getElementById("vvvUsd").addEventListener("input", () => {
   if (!suppressAutoMatch) update();
+});
+document.getElementById("vvvUsd").addEventListener("blur", () => {
+  setVvvUsd(parseVvvUsd());
 });
 
 document.getElementById("autoMatch").addEventListener("change", e => {
@@ -873,7 +887,7 @@ function autoMatchVVV() {
 
   if (vvvUsdNeeded > 0) {
     suppressAutoMatch = true;
-    document.getElementById("vvvUsd").value = Math.ceil(vvvUsdNeeded);
+    setVvvUsd(Math.ceil(vvvUsdNeeded));
     suppressAutoMatch = false;
   }
 }
@@ -957,7 +971,7 @@ function calcCosts() {
     }
   }
 
-  const vvvUsd = parseFloat(document.getElementById("vvvUsd").value) || 0;
+  const vvvUsd = parseVvvUsd();
   const vvvPrice = parseFloat(document.getElementById("vvvPrice").value) || 6.51;
   const totalStaked = parseFloat(document.getElementById("totalStaked").value) || 100000000;
   const appreciation = parseInt(document.getElementById("appreciation").value) / 100;
@@ -1038,11 +1052,11 @@ function update() {
       </div>
       <div class="coverage-detail">
         <span>Need ${fmt(staking.vvvUsdNeeded)} VVV (${Math.ceil(staking.vvvTokensNeeded).toLocaleString()} tokens)</span>
-        <span>Have ${fmt(parseFloat(document.getElementById("vvvUsd").value))}</span>
+        <span>Have ${fmt(parseVvvUsd())}</span>
       </div>
       ${!staking.canCover && !autoMatchActive ? `
         <div class="coverage-action">
-          <button class="btn btn-primary" onclick="document.getElementById('vvvUsd').value=${Math.ceil(staking.vvvUsdNeeded)};update();">Match to Usage</button>
+          <button class="btn btn-primary" onclick="setVvvUsd(${Math.ceil(staking.vvvUsdNeeded)});update();">Match to Usage</button>
         </div>
       ` : ''}
     `;
@@ -1219,7 +1233,7 @@ function exportCSV() {
     csv += `${model},${inM},${outM},${r.provider},${r.monthly.toFixed(2)},${(r.monthly*12).toFixed(2)}\n`;
   });
   csv += `\nStaking Parameters,Value\n`;
-  csv += `VVV USD,${document.getElementById("vvvUsd").value}\n`;
+  csv += `VVV USD,${parseVvvUsd()}\n`;
   csv += `VVV Price,${document.getElementById("vvvPrice").value}\n`;
   csv += `VVV Price Mode,${priceMode}\n`;
   csv += `Appreciation,${document.getElementById("appreciation").value}%\n`;
