@@ -232,8 +232,9 @@ def compare_model(model_key, input_mtok, output_mtok):
 
 
 def calc_staking(vvv_usd, vvv_appreciation=0.0, opportunity_cost_rate=0.10,
-                 total_staked_vvv=TOTAL_ACTIVE_STAKED_VVV, vvv_price=VVV_PRICE_DEFAULT):
-    """Calculate DIEM staking economics."""
+                 staking_apy=0.18, total_staked_vvv=TOTAL_ACTIVE_STAKED_VVV,
+                 vvv_price=VVV_PRICE_DEFAULT):
+    """Calculate DIEM staking economics including staking yield."""
     vvv_tokens = vvv_usd / vvv_price
     user_share = vvv_tokens / total_staked_vvv
 
@@ -244,7 +245,8 @@ def calc_staking(vvv_usd, vvv_appreciation=0.0, opportunity_cost_rate=0.10,
 
     annual_opportunity_cost = vvv_usd * opportunity_cost_rate
     annual_appreciation_value = vvv_usd * vvv_appreciation
-    effective_annual_cost = annual_opportunity_cost - annual_appreciation_value
+    annual_staking_yield = vvv_usd * staking_apy
+    effective_annual_cost = annual_opportunity_cost - annual_appreciation_value - annual_staking_yield
     effective_monthly_cost = effective_annual_cost / 12
 
     if annual_usd_value > 0:
@@ -263,8 +265,10 @@ def calc_staking(vvv_usd, vvv_appreciation=0.0, opportunity_cost_rate=0.10,
         "annual_usd_value": annual_usd_value,
         "opportunity_cost_rate": opportunity_cost_rate,
         "vvv_appreciation": vvv_appreciation,
+        "staking_apy": staking_apy,
         "annual_opportunity_cost": annual_opportunity_cost,
         "annual_appreciation_value": annual_appreciation_value,
+        "annual_staking_yield": annual_staking_yield,
         "effective_annual_cost": effective_annual_cost,
         "effective_monthly_cost": effective_monthly_cost,
         "effective_cost_per_dollar_compute": effective_cost_per_dollar_compute,
@@ -434,8 +438,10 @@ def print_staking_summary(info, price_source=None):
         ("", ""),
         ("Opportunity Cost Rate", f"{info['opportunity_cost_rate']:.0%}"),
         ("Expected VVV Appreciation", f"{info['vvv_appreciation']:+.0%}"),
+        ("VVV Staking APY", f"{info['staking_apy']:.0%}"),
         ("Annual Opportunity Cost", format_usd(info["annual_opportunity_cost"])),
         ("Annual Appreciation Value", format_usd(info["annual_appreciation_value"])),
+        ("Annual Staking Yield", format_usd(info["annual_staking_yield"])),
         ("Effective Annual Cost", format_usd(info["effective_annual_cost"])),
         ("Effective Monthly Cost", format_usd(info["effective_monthly_cost"])),
     ]
@@ -556,6 +562,8 @@ Examples:
                         help="Expected annual VVV price change, e.g. 0.2 for +20%% (default: 0)")
     parser.add_argument("--opportunity-cost", type=float, default=0.10,
                         help="Annual opportunity cost rate (default: 0.10)")
+    parser.add_argument("--staking-apy", type=float, default=0.18,
+                        help="VVV staking APY from protocol emissions (default: 0.18 = 18%%)")
     parser.add_argument("--total-staked-vvv", type=float, default=TOTAL_ACTIVE_STAKED_VVV,
                         help=f"Total VVV staked network-wide (default: {TOTAL_ACTIVE_STAKED_VVV:,.0f})")
 
@@ -638,6 +646,7 @@ Examples:
             vvv_usd=args.vvv_usd,
             vvv_appreciation=args.vvv_appreciation,
             opportunity_cost_rate=args.opportunity_cost,
+            staking_apy=args.staking_apy,
             total_staked_vvv=args.total_staked_vvv,
             vvv_price=args.vvv_price,
         )

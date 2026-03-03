@@ -65,6 +65,7 @@
   .tag-cheapest { background: rgba(0,184,148,0.15); color: var(--green); }
   .tag-markup { background: rgba(225,112,85,0.15); color: var(--red); }
   .tag-staking { background: rgba(108,92,231,0.15); color: var(--accent2); }
+  .tag-diem { background: rgba(116,185,255,0.15); color: var(--blue); }
   canvas { width: 100%; height: 250px; margin-top: 12px; }
   .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
   .summary-card {
@@ -98,7 +99,7 @@
   .section-divider { border: none; border-top: 1px solid var(--border); margin: 8px 0 16px; }
   footer { text-align: center; color: var(--text-dim); font-size: 0.75rem; margin-top: 30px; padding: 20px; }
 
-  /* ─── Nav Bar ─────────────────────────────────────────────────────────── */
+  /* --- Nav Bar --- */
   .navbar {
     display: flex; align-items: center; gap: 0;
     background: var(--surface); border: 1px solid var(--border);
@@ -135,7 +136,7 @@
     .nav-external { width: 100%; border-top: 1px solid var(--border); padding: 8px 12px; }
   }
 
-  /* ─── Doc Pages ──────────────────────────────────────────────────────── */
+  /* --- Doc Pages --- */
   .page { display: none; }
   .page.active { display: block; }
   .doc-content { max-width: 800px; }
@@ -177,40 +178,54 @@
   .doc-content .scenario .sc-detail { color: var(--text-dim); font-size: 0.8rem; }
   .doc-content .scenario .sc-result { margin-top: 6px; font-weight: 600; font-size: 0.85rem; }
 
-  /* ─── Staking Requirements ──────────────────────────────────────────── */
-  .req-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  @media (max-width: 768px) { .req-grid { grid-template-columns: 1fr; } }
-  .req-metric {
-    background: var(--surface2); border-radius: 10px; padding: 16px;
-    text-align: center; position: relative;
+  /* --- Inline Coverage --- */
+  .coverage-inline {
+    background: var(--surface2); border-radius: 10px; padding: 12px 14px; margin-bottom: 12px;
   }
-  .req-metric .rm-val { font-size: 1.5rem; font-weight: 700; margin-bottom: 2px; }
-  .req-metric .rm-lbl { font-size: 0.75rem; color: var(--text-dim); }
-  .req-metric .rm-sub { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; }
-  .gauge-wrap { margin: 16px 0; }
-  .gauge-bar { height: 20px; background: var(--surface2); border-radius: 10px; overflow: hidden; position: relative; }
-  .gauge-fill { height: 100%; border-radius: 10px; transition: width 0.4s ease; }
-  .gauge-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; }
-  .gauge-pct { position: absolute; right: 8px; top: 2px; font-size: 0.72rem; font-weight: 700; color: var(--bg); }
-  .req-action { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
-  .req-action .btn { font-size: 0.8rem; padding: 6px 16px; }
-  .req-note { font-size: 0.78rem; color: var(--text-dim); }
-  .req-callout {
-    border-left: 3px solid var(--accent); background: rgba(108,92,231,0.08);
-    border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 12px; font-size: 0.82rem;
+  .coverage-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
   }
-  .req-callout strong { color: var(--text); }
-  .req-vs-row { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
-  .req-vs-item {
-    flex: 1; min-width: 200px; background: var(--surface2); border-radius: 10px; padding: 12px 16px;
+  .coverage-header .ch-label { font-size: 0.78rem; font-weight: 600; color: var(--text-dim); }
+  .coverage-header .ch-pct { font-size: 0.9rem; font-weight: 700; }
+  .coverage-bar { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+  .coverage-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+  .coverage-detail {
+    display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;
   }
-  .req-vs-item .rv-label { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 2px; }
-  .req-vs-item .rv-val { font-size: 1.1rem; font-weight: 700; }
+  .coverage-action { margin-top: 8px; text-align: center; }
+  .coverage-action .btn { font-size: 0.75rem; padding: 4px 12px; }
+
+  /* --- Auto-match --- */
+  .auto-match {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+  }
+  .auto-match input[type="checkbox"] {
+    width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer;
+    margin: 0;
+  }
+  .auto-match label {
+    font-size: 0.78rem; color: var(--text-dim); margin: 0; cursor: pointer;
+  }
+
+  /* --- DIEM Purchase --- */
+  .diem-purchase {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; margin-top: 12px;
+  }
+  .diem-purchase h3 { margin-bottom: 6px; font-size: 0.82rem; }
+  .diem-purchase .dp-row {
+    display: flex; justify-content: space-between; padding: 3px 0; font-size: 0.82rem;
+  }
+  .diem-purchase .dp-row .dp-label { color: var(--text-dim); }
+  .diem-purchase .dp-note {
+    font-size: 0.72rem; color: var(--text-dim); margin-top: 6px;
+    border-top: 1px solid var(--border); padding-top: 6px;
+  }
 </style>
 </head>
 <body>
 <div class="container">
-  <!-- ═══ Nav Bar ═══ -->
+  <!-- === Nav Bar === -->
   <nav class="navbar">
     <div class="logo">Venice Cost Compare</div>
     <div class="nav-links">
@@ -225,24 +240,33 @@
     </div>
   </nav>
 
-  <!-- ═══ Page: VVV & Staking ═══ -->
+  <!-- === Page: VVV & Staking === -->
   <div id="page-how-vvv" class="page">
     <div class="card doc-content">
       <h2>What is VVV?</h2>
       <p>The <strong>Venice Token (VVV)</strong> is an ERC-20 token on Coinbase's Base L2 that gives holders ongoing access to Venice's private, uncensored AI inference. Instead of paying per request, you <strong>stake VVV to claim a proportional share of Venice's total GPU capacity</strong> &mdash; indefinitely.</p>
-      <p>If you stake 1% of all VVV, you get 1% of Venice's API capacity. You don't spend the VVV &mdash; you just stake it and use your share of inference as needed.</p>
+      <p>If you stake 1% of all active VVV, you get 1% of Venice's API capacity. You don't spend the VVV &mdash; you just stake it and use your share of inference as needed.</p>
+
+      <h2>Dual Benefit: Compute + Yield</h2>
+      <p>VVV staking provides <strong>two concurrent benefits</strong>:</p>
+      <ol>
+        <li><strong>AI Compute Access</strong> &mdash; Your daily DIEM allocation = (your staked VVV / total active stakers' VVV) &times; total network capacity. Currently ~18,148 DIEM/day network-wide.</li>
+        <li><strong>Staking Yield</strong> &mdash; Stakers earn additional VVV tokens from protocol emissions. Current APY is approximately <strong>~18%</strong> (variable, reduced from earlier ~60% after a 25% emissions cut in Feb 2026).</li>
+      </ol>
+      <p>These are <strong>not either/or</strong> &mdash; you receive both simultaneously. If you further lock sVVV to mint DIEM tokens, you retain 80% of the staking yield.</p>
+
+      <div class="callout">
+        <p><strong>Key insight:</strong> "Active stakers" means those who have made an API call in the last 7 days. Your share is calculated against active stakers only, so inactive stakers don't dilute your allocation. This resulted in a ~14x increase in effective DIEM per token for active users.</p>
+      </div>
 
       <h2>How Staking Works</h2>
       <ol>
         <li><strong>Acquire VVV</strong> &mdash; Purchase on a supported exchange or DEX on Base.</li>
         <li><strong>Stake</strong> &mdash; Navigate to <a href="https://venice.ai/token" target="_blank" rel="noopener" style="color:var(--accent2)">venice.ai/token</a>, connect your wallet, and stake your VVV tokens.</li>
         <li><strong>Use API</strong> &mdash; Your daily DIEM allocation is calculated from your share of total active staked VVV. Use it for any Venice-supported model.</li>
+        <li><strong>Earn yield</strong> &mdash; VVV emissions are distributed to stakers continuously.</li>
         <li><strong>Unstake</strong> &mdash; There is a <strong>7-day unstaking period</strong> before tokens are unlocked.</li>
       </ol>
-
-      <div class="callout">
-        <p><strong>Key insight:</strong> "Active stakers" means those who have made an API call in the last 7 days. Your share is calculated against active stakers only, so inactive stakers don't dilute your allocation.</p>
-      </div>
 
       <h2>Venice.ai Documentation</h2>
       <a class="link-card" href="https://venice.ai/blog/introducing-the-venice-token-vvv" target="_blank" rel="noopener">
@@ -264,7 +288,7 @@
     </div>
   </div>
 
-  <!-- ═══ Page: How DIEM Works ═══ -->
+  <!-- === Page: How DIEM Works === -->
   <div id="page-how-diem" class="page">
     <div class="card doc-content">
       <h2>What is DIEM?</h2>
@@ -280,12 +304,18 @@ annual_compute_value = daily_diem &times; 365
       </div>
       <p>The network currently produces <strong>18,148 DIEM per day</strong>. As Venice scales GPU capacity, this number grows &mdash; meaning the same VVV stake yields more compute over time.</p>
 
-      <h2>Tokenized DIEM (Minting)</h2>
-      <p>VVV holders can also <strong>mint DIEM as tradeable ERC-20 tokens</strong> by locking their staked VVV (sVVV). Each minted DIEM token provides $1/day of API credit forever. While locked for DIEM minting, stakers still earn 80% of VVV's usual yield.</p>
-      <p>This creates the first-ever <strong>tradeable on-chain AI compute asset</strong> &mdash; DIEM can be bought and sold on secondary markets, letting non-VVV-holders access Venice compute.</p>
+      <h2>Two Ways to Get DIEM</h2>
+      <p>There are two paths to DIEM-based compute access:</p>
+      <ol>
+        <li><strong>Stake VVV</strong> &mdash; Lock VVV tokens, receive a proportional daily DIEM allocation. You keep 100% staking yield. Capital is recoverable after 7-day unstaking.</li>
+        <li><strong>Buy DIEM tokens on market</strong> &mdash; DIEM is also a tradeable ERC-20 token. Each token provides $1/day of API credit in perpetuity. No VVV required, but it's a one-time capital outlay with no staking yield.</li>
+      </ol>
+
+      <h2>Minting DIEM from VVV</h2>
+      <p>VVV holders can <strong>mint DIEM as tradeable ERC-20 tokens</strong> by locking their staked VVV (sVVV). While locked for DIEM minting, stakers still earn <strong>80% of VVV staking yield</strong>. You can burn DIEM to recover your locked sVVV at any time.</p>
 
       <div class="callout">
-        <p><strong>DIEM vs VVV staking:</strong> Direct VVV staking gives you a dynamic allocation (changes with total stakers). Minted DIEM tokens give a fixed $1/day each, but require locking sVVV. Both provide zero-marginal-cost API access.</p>
+        <p><strong>DIEM vs VVV staking:</strong> Direct VVV staking gives you a dynamic allocation (changes with total stakers) plus 100% yield. Minted DIEM tokens give a fixed $1/day each with 80% yield, but require locking sVVV. Buying DIEM on market gives fixed $1/day but no yield. All provide zero-marginal-cost API access.</p>
       </div>
 
       <h2>Venice.ai Documentation</h2>
@@ -308,11 +338,11 @@ annual_compute_value = daily_diem &times; 365
     </div>
   </div>
 
-  <!-- ═══ Page: Cost Model ═══ -->
+  <!-- === Page: Cost Model === -->
   <div id="page-cost-model" class="page">
     <div class="card doc-content">
       <h2>How This Calculator Works</h2>
-      <p>This tool compares the <strong>true cost</strong> of accessing AI models through four channels: the model provider directly (Anthropic / OpenAI), OpenRouter (provider + 5.5% fee), Venice pay-as-you-go (provider + ~20-25% markup), and Venice DIEM staking (zero marginal cost, but capital is locked).</p>
+      <p>This tool compares the <strong>true cost</strong> of accessing AI models through five channels: the model provider directly (Anthropic / OpenAI / Google), OpenRouter (provider + 5.5% fee), Venice pay-as-you-go (~20-25% markup), Venice DIEM staking (zero marginal cost + yield), and buying DIEM tokens on secondary markets.</p>
 
       <h2>Pay-As-You-Go Comparison</h2>
       <p>Straightforward: multiply your monthly token volume by the per-1M-token rate for each provider.</p>
@@ -322,37 +352,47 @@ monthly_cost = (input_millions &times; input_rate) + (output_millions &times; ou
       <p><strong>OpenRouter</strong> adds a 5.5% platform fee on top of the provider's direct price. <strong>Venice pay-as-you-go</strong> typically marks up 20-25% over the direct provider.</p>
 
       <h2>Staking "Effective Cost" Model</h2>
-      <p>Staking VVV gives you compute at zero marginal cost &mdash; but your capital is locked. The <strong>real cost</strong> depends on what else you could have done with that capital and whether VVV appreciates or depreciates:</p>
+      <p>Staking VVV gives you compute at zero marginal cost <strong>plus staking yield</strong> &mdash; but your capital is locked. The <strong>real cost</strong> depends on opportunity cost, price expectations, and the yield you earn:</p>
       <div class="formula-box">
-effective_annual_cost = (vvv_value &times; opportunity_cost_rate) - (vvv_value &times; expected_appreciation)
+effective_annual_cost = vvv_value &times; (opportunity_cost - expected_appreciation - staking_apy)
       </div>
-      <p>The two sliders in the calculator let you model this honestly:</p>
+      <p>The three sliders in the calculator let you model this honestly:</p>
       <ul>
         <li><strong>Opportunity Cost Rate</strong> &mdash; What annual return could you earn elsewhere? (Treasury yields, DeFi, equities, etc.)</li>
         <li><strong>Expected VVV Price Change</strong> &mdash; Do you think VVV will go up, stay flat, or decline?</li>
+        <li><strong>VVV Staking APY</strong> &mdash; The yield earned from protocol emissions (~18% currently). This directly offsets your cost of capital.</li>
       </ul>
+
+      <h2>DIEM Market Purchase</h2>
+      <p>Instead of staking VVV, you can buy DIEM tokens directly on DEXes. Each DIEM token provides <strong>$1/day of API credit in perpetuity</strong>. The cost is a one-time capital outlay at market price. The effective annual cost is:</p>
+      <div class="formula-box">
+diem_tokens_needed = monthly_venice_cost / 30<br>
+total_diem_cost = diem_tokens_needed &times; diem_market_price<br>
+annual_eff_cost = total_diem_cost &times; opportunity_cost_rate
+      </div>
+      <p>DIEM purchased on market does <strong>not</strong> earn staking yield (only VVV stakers earn yield). But it requires no VVV exposure and provides fixed compute allocation.</p>
 
       <h2>Example Scenarios</h2>
       <div class="scenario-grid">
         <div class="scenario">
-          <div class="sc-label">Bullish VVV</div>
-          <div class="sc-detail">+20% appreciation, 10% opp cost</div>
-          <div class="sc-result val-green">Net cost = &minus;10% (staking pays you)</div>
+          <div class="sc-label">Bullish VVV + Yield</div>
+          <div class="sc-detail">+20% appreciation, 10% opp cost, 18% APY</div>
+          <div class="sc-result val-green">Net cost = &minus;28% (staking pays you)</div>
         </div>
         <div class="scenario">
-          <div class="sc-label">Neutral VVV</div>
-          <div class="sc-detail">0% appreciation, 10% opp cost</div>
-          <div class="sc-result val-orange">Net cost = 10% of staked capital/yr</div>
+          <div class="sc-label">Neutral VVV + Yield</div>
+          <div class="sc-detail">0% appreciation, 10% opp cost, 18% APY</div>
+          <div class="sc-result val-green">Net cost = &minus;8% (yield exceeds opp cost)</div>
         </div>
         <div class="scenario">
-          <div class="sc-label">Bearish VVV</div>
-          <div class="sc-detail">&minus;30% depreciation, 10% opp cost</div>
-          <div class="sc-result val-red">Net cost = 40% of capital/yr</div>
+          <div class="sc-label">Bearish VVV + Yield</div>
+          <div class="sc-detail">&minus;30% depreciation, 10% opp cost, 18% APY</div>
+          <div class="sc-result val-red">Net cost = 22% of capital/yr</div>
         </div>
         <div class="scenario">
-          <div class="sc-label">Low Opp Cost Bull</div>
-          <div class="sc-detail">+50% appreciation, 5% opp cost</div>
-          <div class="sc-result val-green">Net cost = &minus;45% (strong gain)</div>
+          <div class="sc-label">DIEM Purchase (no yield)</div>
+          <div class="sc-detail">One-time buy, 10% opp cost, 0% yield</div>
+          <div class="sc-result val-orange">Net cost = 10% of DIEM capital/yr</div>
         </div>
       </div>
 
@@ -361,20 +401,21 @@ effective_annual_cost = (vvv_value &times; opportunity_cost_rate) - (vvv_value &
         <li><strong>7-day unstaking period</strong> &mdash; Your capital isn't fully liquid. In a crash, you can't exit instantly.</li>
         <li><strong>Smart contract risk</strong> &mdash; Staking contracts could have bugs. This is unquantified risk.</li>
         <li><strong>Network capacity changes</strong> &mdash; Venice may add GPUs, increasing total DIEM/day (good for stakers).</li>
-        <li><strong>VVV staking yield</strong> &mdash; Stakers earn additional VVV yield (80% while DIEM-locked). Not included here.</li>
+        <li><strong>Yield compounding</strong> &mdash; Staking yield is shown as simple APY, not compounded. Actual returns may vary.</li>
         <li><strong>Gas fees</strong> &mdash; Base L2 gas for staking/unstaking transactions (typically negligible).</li>
+        <li><strong>DIEM price fluctuation</strong> &mdash; Market DIEM tokens can trade above or below $365 intrinsic value.</li>
       </ul>
 
       <div class="callout">
-        <p><strong>Bottom line:</strong> If you're bullish on VVV and have heavy API usage, staking can be dramatically cheaper than pay-as-you-go. If you're bearish, stick with direct provider access. This tool helps you quantify the difference.</p>
+        <p><strong>Bottom line:</strong> With ~18% staking APY, VVV staking becomes profitable even at flat token price if your opportunity cost is under 18%. For heavy API users, this can be dramatically cheaper than pay-as-you-go. Use the sliders to model your own assumptions.</p>
       </div>
     </div>
   </div>
 
-  <!-- ═══ Page: Calculator (main content) ═══ -->
+  <!-- === Page: Calculator (main content) === -->
   <div id="page-calculator" class="page active">
   <h1>Venice.ai Cost Comparison</h1>
-  <p class="subtitle">Compare Venice pay-as-you-go, DIEM staking, Anthropic, OpenAI & OpenRouter pricing. All calculations run locally in your browser.</p>
+  <p class="subtitle">Compare Venice pay-as-you-go, DIEM staking, DIEM purchase, and direct provider pricing. All calculations run locally.</p>
 
   <div class="grid">
     <!-- LEFT: Usage Inputs -->
@@ -408,12 +449,20 @@ effective_annual_cost = (vvv_value &times; opportunity_cost_rate) - (vvv_value &
       <div id="csvStatus"></div>
     </div>
 
-    <!-- RIGHT: Staking Inputs -->
+    <!-- RIGHT: Staking & Acquisition -->
     <div class="card">
-      <h2>DIEM Staking Model</h2>
+      <h2>VVV Staking</h2>
 
       <label for="vvvUsd">VVV Investment (USD)</label>
       <input type="number" id="vvvUsd" value="10000" min="0" step="100">
+
+      <div class="auto-match">
+        <input type="checkbox" id="autoMatch" checked>
+        <label for="autoMatch">Auto-match VVV to cover usage</label>
+      </div>
+
+      <!-- Inline coverage gauge -->
+      <div class="coverage-inline" id="coverageInline"></div>
 
       <h3>VVV Price Source</h3>
       <div style="display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap; align-items:center;">
@@ -434,7 +483,7 @@ effective_annual_cost = (vvv_value &times; opportunity_cost_rate) - (vvv_value &
       <label for="vvvPrice">VVV Token Price (USD) <span id="priceSourceLabel" style="color:var(--accent2);"></span></label>
       <input type="number" id="vvvPrice" value="6.51" min="0.01" step="0.01">
 
-      <label>Total Staked VVV (network-wide) <span style="color:var(--text-dim); font-size:0.72rem;">— manual input, check <a href="https://venice.ai/token" target="_blank" style="color:var(--accent2)">venice.ai/token</a></span></label>
+      <label>Total Staked VVV (network-wide) <span style="color:var(--text-dim); font-size:0.72rem;">&mdash; manual input, check <a href="https://venice.ai/token" target="_blank" style="color:var(--accent2)">venice.ai/token</a></span></label>
       <input type="number" id="totalStaked" value="100000000" min="1" step="1000000">
 
       <div class="slider-row">
@@ -449,26 +498,29 @@ effective_annual_cost = (vvv_value &times; opportunity_cost_rate) - (vvv_value &
       </div>
       <input type="range" id="oppCost" min="0" max="20" value="10" step="1">
 
+      <div class="slider-row">
+        <label for="stakingApy">VVV Staking APY (yield)</label>
+        <span class="slider-val" id="stakingApyVal">18%</span>
+      </div>
+      <input type="range" id="stakingApy" min="0" max="60" value="18" step="1">
+
       <hr class="section-divider">
       <div class="staking-result" id="stakingResult"></div>
+
+      <!-- DIEM Market Purchase -->
+      <div class="diem-purchase" id="diemPurchase"></div>
     </div>
   </div>
 
   <!-- Summary Cards -->
   <div class="summary-grid" id="summaryCards"></div>
 
-  <!-- Staking Requirements Card -->
-  <div class="card" id="stakingReqCard" style="margin-bottom:20px; display:none;">
-    <h2>Staking Requirements for Your Usage</h2>
-    <div id="stakingReqContent"></div>
-  </div>
-
   <!-- Comparison Table -->
   <div class="card" style="margin-bottom:20px;">
     <h2>Cost Comparison</h2>
     <table id="compTable">
       <thead>
-        <tr><th>Provider</th><th class="num">Monthly</th><th class="num">Annual</th><th class="num">vs Cheapest</th><th></th></tr>
+        <tr><th>Provider / Method</th><th class="num">Monthly</th><th class="num">Annual</th><th class="num">vs Cheapest</th><th></th></tr>
       </thead>
       <tbody></tbody>
     </table>
@@ -488,11 +540,11 @@ effective_annual_cost = (vvv_value &times; opportunity_cost_rate) - (vvv_value &
 
   </div><!-- /page-calculator -->
 
-  <footer>Prices as of 2026-03-02. Venice DIEM network: 18,148 DIEM/day. 1 DIEM = $1/day compute.</footer>
+  <footer>Prices as of 2026-03-02. Venice DIEM network: 18,148 DIEM/day. 1 DIEM = $1/day compute. VVV staking APY is variable.</footer>
 </div>
 
 <script>
-// ─── Page Navigation ─────────────────────────────────────────────────────
+// --- Page Navigation ---
 function showPage(name) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
@@ -505,7 +557,7 @@ function showPage(name) {
   if (name === "calculator") setTimeout(update, 10);
 }
 
-// ─── Pricing Data (from docs.venice.ai/overview/pricing) ────────────────
+// --- Pricing Data (from docs.venice.ai/overview/pricing) ---
 const MODELS = {
   // Anthropic (Venice + direct)
   "claude-opus-4.6":     { display: "Claude Opus 4.6",       venice: [6.00, 30.00],  anthropic: [5.00, 25.00] },
@@ -535,29 +587,33 @@ const MODELS = {
 const OR_FEE = 0.055;
 const DIEM_DAILY = 18148;
 
-// ─── Live Data State ────────────────────────────────────────────────────
-let liveData = { spot: null, ma7d: null, ma30d: null, low30d: null, high30d: null,
-                 marketCap: null, volume24h: null, change24h: null, circulatingSupply: null,
-                 fetchedAt: null };
-let priceMode = "spot"; // spot | 7d | 30d | manual
+// --- Live Data State ---
+let liveData = {
+  spot: null, ma7d: null, ma30d: null, low30d: null, high30d: null,
+  marketCap: null, volume24h: null, change24h: null, circulatingSupply: null,
+  diemPrice: null, diemMarketCap: null, diemChange24h: null,
+  fetchedAt: null
+};
+let priceMode = "spot";
+let autoMatchActive = true;
+let suppressAutoMatch = false; // prevent loops when auto-match sets VVV
 
-// ─── CoinGecko Fetch ────────────────────────────────────────────────────
+// --- CoinGecko Fetch ---
 async function fetchLiveData() {
   const btn = document.getElementById("btnRefresh");
   const status = document.getElementById("liveStatus");
   btn.textContent = "Fetching..."; btn.disabled = true;
   status.textContent = "Connecting to CoinGecko...";
 
-  // CoinGecko demo API key (free tier, get yours at coingecko.com/en/api)
   const cgKey = (document.getElementById("cgApiKey") || {}).value || "";
   const headers = cgKey ? { "x-cg-demo-api-key": cgKey } : {};
   const kp = cgKey ? `&x_cg_demo_api_key=${encodeURIComponent(cgKey)}` : "";
 
   try {
-    // Fetch current price + market data
-    const [priceResp, chartResp] = await Promise.all([
+    const [priceResp, chartResp, diemResp] = await Promise.all([
       fetch("https://api.coingecko.com/api/v3/simple/price?ids=venice-token&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true" + kp, { headers }),
-      fetch("https://api.coingecko.com/api/v3/coins/venice-token/market_chart?vs_currency=usd&days=30" + kp, { headers })
+      fetch("https://api.coingecko.com/api/v3/coins/venice-token/market_chart?vs_currency=usd&days=30" + kp, { headers }),
+      fetch("https://api.coingecko.com/api/v3/simple/price?ids=diem&vs_currencies=usd&include_market_cap=true&include_24hr_change=true" + kp, { headers })
     ]);
 
     if (!priceResp.ok || !chartResp.ok) throw new Error("API returned " + priceResp.status);
@@ -573,18 +629,27 @@ async function fetchLiveData() {
     liveData.volume24h = vt.usd_24h_vol;
     liveData.change24h = vt.usd_24h_change;
 
-    // Moving averages from hourly data points
     const last7d = prices.slice(-7 * 24);
     liveData.ma7d = last7d.reduce((a, b) => a + b, 0) / last7d.length;
     liveData.ma30d = prices.reduce((a, b) => a + b, 0) / prices.length;
     liveData.low30d = Math.min(...prices);
     liveData.high30d = Math.max(...prices);
-    liveData.fetchedAt = new Date().toLocaleTimeString();
 
-    // Apply price based on current mode
+    // DIEM token data
+    if (diemResp.ok) {
+      const diemData = await diemResp.json();
+      if (diemData.diem) {
+        liveData.diemPrice = diemData.diem.usd;
+        liveData.diemMarketCap = diemData.diem.usd_market_cap;
+        liveData.diemChange24h = diemData.diem.usd_24h_change;
+      }
+    }
+
+    liveData.fetchedAt = new Date().toLocaleTimeString();
     applyPriceMode();
     renderLiveMarketData();
-    status.innerHTML = `<span style="color:var(--green)">Updated ${liveData.fetchedAt} via CoinGecko</span>`;
+    const diemNote = liveData.diemPrice ? ` | DIEM: $${liveData.diemPrice.toFixed(2)}` : "";
+    status.innerHTML = `<span style="color:var(--green)">Updated ${liveData.fetchedAt} via CoinGecko${diemNote}</span>`;
   } catch (err) {
     const hint = !cgKey ? ' Get a free key at <a href="https://www.coingecko.com/en/api" target="_blank" style="color:var(--accent2)">coingecko.com/en/api</a> and paste it above.' : '';
     status.innerHTML = `<span style="color:var(--red)">Failed: ${err.message}.${hint} Using manual price.</span>`;
@@ -619,7 +684,7 @@ function applyPriceMode() {
 
   priceEl.value = price.toFixed(4);
   priceEl.disabled = true;
-  label.textContent = `(${modeLabel} — live)`;
+  label.textContent = `(${modeLabel} \u2014 live)`;
   update();
 }
 
@@ -642,22 +707,31 @@ function renderLiveMarketData() {
   if (!liveData.spot) { el.style.display = "none"; return; }
   el.style.display = "block";
 
-  const fmtCompact = v => v == null ? "—" : "$" + (v >= 1e6 ? (v/1e6).toFixed(1) + "M" : v.toLocaleString("en-US", {maximumFractionDigits: 2}));
+  const fmtCompact = v => v == null ? "\u2014" : "$" + (v >= 1e6 ? (v/1e6).toFixed(1) + "M" : v.toLocaleString("en-US", {maximumFractionDigits: 2}));
   const chgColor = liveData.change24h >= 0 ? "var(--green)" : "var(--red)";
   const chgSign = liveData.change24h >= 0 ? "+" : "";
 
+  let diemRow = "";
+  if (liveData.diemPrice) {
+    const dChgColor = (liveData.diemChange24h || 0) >= 0 ? "var(--green)" : "var(--red)";
+    const dChgSign = (liveData.diemChange24h || 0) >= 0 ? "+" : "";
+    diemRow = `<div><span style="color:var(--text-dim)">DIEM</span> <strong>$${liveData.diemPrice.toFixed(2)}</strong></div>
+      <div><span style="color:var(--text-dim)">DIEM 24h</span> <strong style="color:${dChgColor}">${dChgSign}${(liveData.diemChange24h||0).toFixed(2)}%</strong></div>`;
+  }
+
   el.innerHTML = `
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; font-size:0.78rem; background:var(--surface2); border-radius:8px; padding:10px 14px;">
-      <div><span style="color:var(--text-dim)">Spot</span> <strong>$${liveData.spot.toFixed(4)}</strong></div>
+      <div><span style="color:var(--text-dim)">VVV Spot</span> <strong>$${liveData.spot.toFixed(4)}</strong></div>
       <div><span style="color:var(--text-dim)">24h</span> <strong style="color:${chgColor}">${chgSign}${liveData.change24h.toFixed(2)}%</strong></div>
       <div><span style="color:var(--text-dim)">7d MA</span> <strong>$${liveData.ma7d.toFixed(4)}</strong></div>
       <div><span style="color:var(--text-dim)">30d MA</span> <strong>$${liveData.ma30d.toFixed(4)}</strong></div>
-      <div><span style="color:var(--text-dim)">30d Range</span> <strong>$${liveData.low30d.toFixed(2)} – $${liveData.high30d.toFixed(2)}</strong></div>
+      <div><span style="color:var(--text-dim)">30d Range</span> <strong>$${liveData.low30d.toFixed(2)} \u2013 $${liveData.high30d.toFixed(2)}</strong></div>
       <div><span style="color:var(--text-dim)">Mkt Cap</span> <strong>${fmtCompact(liveData.marketCap)}</strong></div>
+      ${diemRow}
     </div>`;
 }
 
-// ─── Init ────────────────────────────────────────────────────────────────
+// --- Init ---
 const modelSel = document.getElementById("model");
 Object.entries(MODELS).forEach(([k, m]) => {
   const opt = document.createElement("option");
@@ -674,11 +748,34 @@ if (params.get("o")) document.getElementById("outputMtok").value = params.get("o
 if (params.get("v")) document.getElementById("vvvUsd").value = params.get("v");
 if (params.get("a")) document.getElementById("appreciation").value = params.get("a");
 if (params.get("oc")) document.getElementById("oppCost").value = params.get("oc");
+if (params.get("apy")) document.getElementById("stakingApy").value = params.get("apy");
+if (params.get("am") === "0") { document.getElementById("autoMatch").checked = false; autoMatchActive = false; }
 if (params.get("pm")) { priceMode = params.get("pm"); setPriceMode(priceMode); }
 
-// ─── Event Listeners ─────────────────────────────────────────────────────
-["model","inputMtok","outputMtok","vvvUsd","vvvPrice","totalStaked","appreciation","oppCost"].forEach(id => {
+// --- Event Listeners ---
+["model","vvvPrice","totalStaked","appreciation","oppCost","stakingApy"].forEach(id => {
   document.getElementById(id).addEventListener("input", update);
+});
+
+// Usage inputs trigger auto-match
+["inputMtok","outputMtok","model"].forEach(id => {
+  document.getElementById(id).addEventListener("input", () => {
+    if (autoMatchActive && !suppressAutoMatch) {
+      autoMatchVVV();
+    }
+    update();
+  });
+});
+
+// VVV USD manual edit — only recalc, don't auto-match
+document.getElementById("vvvUsd").addEventListener("input", () => {
+  if (!suppressAutoMatch) update();
+});
+
+document.getElementById("autoMatch").addEventListener("change", e => {
+  autoMatchActive = e.target.checked;
+  if (autoMatchActive) autoMatchVVV();
+  update();
 });
 
 document.getElementById("appreciation").addEventListener("input", e => {
@@ -688,17 +785,45 @@ document.getElementById("appreciation").addEventListener("input", e => {
 document.getElementById("oppCost").addEventListener("input", e => {
   document.getElementById("oppCostVal").textContent = e.target.value + "%";
 });
+document.getElementById("stakingApy").addEventListener("input", e => {
+  document.getElementById("stakingApyVal").textContent = e.target.value + "%";
+});
 
-// ─── Presets ─────────────────────────────────────────────────────────────
+// --- Auto-match VVV to Usage ---
+function autoMatchVVV() {
+  const key = modelSel.value;
+  const m = MODELS[key];
+  if (!m.venice) return;
+
+  const inM = parseFloat(document.getElementById("inputMtok").value) || 0;
+  const outM = parseFloat(document.getElementById("outputMtok").value) || 0;
+  const vvvPrice = parseFloat(document.getElementById("vvvPrice").value) || 6.51;
+  const totalStaked = parseFloat(document.getElementById("totalStaked").value) || 100000000;
+
+  const monthlyPayGo = inM * m.venice[0] + outM * m.venice[1];
+  const dailyDiemNeeded = monthlyPayGo / 30;
+  const shareNeeded = dailyDiemNeeded / DIEM_DAILY;
+  const vvvTokensNeeded = shareNeeded * totalStaked;
+  const vvvUsdNeeded = vvvTokensNeeded * vvvPrice;
+
+  if (vvvUsdNeeded > 0) {
+    suppressAutoMatch = true;
+    document.getElementById("vvvUsd").value = Math.ceil(vvvUsdNeeded);
+    suppressAutoMatch = false;
+  }
+}
+
+// --- Presets ---
 function setPreset(inputM, outputM) {
   document.getElementById("inputMtok").value = inputM;
   document.getElementById("outputMtok").value = outputM;
   document.querySelectorAll(".presets button:not(#pm-spot):not(#pm-7d):not(#pm-30d):not(#pm-manual)").forEach(b => b.classList.remove("active"));
   event.target.classList.add("active");
+  if (autoMatchActive) autoMatchVVV();
   update();
 }
 
-// ─── CSV Upload ──────────────────────────────────────────────────────────
+// --- CSV Upload ---
 const dropZone = document.getElementById("dropZone");
 const csvFile = document.getElementById("csvFile");
 
@@ -735,12 +860,13 @@ function processCSV(file) {
     document.getElementById("outputMtok").value = Math.round(totalOut / 1e6);
     document.getElementById("csvStatus").innerHTML =
       `<span style="color:var(--green)">Loaded ${rowCount} rows: ${inM}M input, ${outM}M output tokens</span>`;
+    if (autoMatchActive) autoMatchVVV();
     update();
   };
   reader.readAsText(file);
 }
 
-// ─── Core Calculation ────────────────────────────────────────────────────
+// --- Core Calculation ---
 function calcCosts() {
   const key = modelSel.value;
   const m = MODELS[key];
@@ -773,6 +899,7 @@ function calcCosts() {
   const totalStaked = parseFloat(document.getElementById("totalStaked").value) || 100000000;
   const appreciation = parseInt(document.getElementById("appreciation").value) / 100;
   const oppCost = parseInt(document.getElementById("oppCost").value) / 100;
+  const stakingApy = parseInt(document.getElementById("stakingApy").value) / 100;
 
   const vvvTokens = vvvUsd / vvvPrice;
   const share = vvvTokens / totalStaked;
@@ -780,38 +907,50 @@ function calcCosts() {
   const monthlyCompute = dailyDiem * 30;
   const annualCompute = dailyDiem * 365;
 
+  // Effective cost now includes staking APY as an offset
   const annualOppCost = vvvUsd * oppCost;
   const annualAppreciation = vvvUsd * appreciation;
-  const effectiveAnnual = annualOppCost - annualAppreciation;
+  const annualYield = vvvUsd * stakingApy;
+  const effectiveAnnual = annualOppCost - annualAppreciation - annualYield;
   const effectiveMonthly = effectiveAnnual / 12;
 
-  // Monthly DIEM needed to cover pay-go cost for this model
+  // Break-even requirements
   const monthlyPayGo = m.venice ? (inM * m.venice[0] + outM * m.venice[1]) : 0;
-  const dailyDiemNeeded = monthlyPayGo / 30; // 1 DIEM = $1/day
+  const dailyDiemNeeded = monthlyPayGo / 30;
   const shareNeeded = dailyDiemNeeded / DIEM_DAILY;
   const vvvTokensNeeded = shareNeeded * totalStaked;
   const vvvUsdNeeded = vvvTokensNeeded * vvvPrice;
-  const diemTokensNeeded = dailyDiemNeeded; // 1 DIEM token = $1/day
   const coveragePct = dailyDiemNeeded > 0 ? (dailyDiem / dailyDiemNeeded) * 100 : (vvvUsd > 0 ? Infinity : 0);
+
+  // DIEM market purchase option
+  const diemTokensNeeded = dailyDiemNeeded; // 1 DIEM = $1/day
+  const diemMarketPrice = liveData.diemPrice || 725; // fallback estimate
+  const diemTotalCost = diemTokensNeeded * diemMarketPrice;
+  const diemAnnualEffCost = diemTotalCost * oppCost; // no yield, just opp cost
+  const diemMonthlyEffCost = diemAnnualEffCost / 12;
 
   const staking = {
     vvvTokens, share, dailyDiem, monthlyCompute, annualCompute,
-    annualOppCost, annualAppreciation, effectiveAnnual, effectiveMonthly,
+    annualOppCost, annualAppreciation, annualYield, effectiveAnnual, effectiveMonthly,
     canCover: m.venice ? monthlyCompute >= monthlyPayGo : false,
-    // Break-even requirements
     monthlyPayGo, dailyDiemNeeded, shareNeeded, vvvTokensNeeded, vvvUsdNeeded,
-    diemTokensNeeded, coveragePct, vvvPrice, totalStaked,
+    coveragePct, vvvPrice, totalStaked, stakingApy,
+    diemTokensNeeded, diemMarketPrice, diemTotalCost, diemAnnualEffCost, diemMonthlyEffCost,
   };
 
   if (m.venice && vvvUsd > 0) {
-    results.push({ provider: "Venice DIEM Staking", monthly: effectiveMonthly, isStaking: true, canCover: staking.canCover });
+    results.push({ provider: "VVV Staking", monthly: effectiveMonthly, isStaking: true, canCover: staking.canCover });
+  }
+
+  if (m.venice && diemTokensNeeded > 0) {
+    results.push({ provider: "DIEM Purchase", monthly: diemMonthlyEffCost, isDiem: true });
   }
 
   results.sort((a, b) => a.monthly - b.monthly);
   return { results, staking, model: m };
 }
 
-// ─── Render ──────────────────────────────────────────────────────────────
+// --- Render ---
 function fmt(v) {
   if (v == null) return "\u2014";
   return (v < 0 ? "-$" : "$") + Math.abs(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -820,128 +959,93 @@ function fmt(v) {
 function update() {
   const { results, staking, model } = calcCosts();
   const cheapest = results.length ? results[0].monthly : 0;
+  const m = MODELS[modelSel.value];
 
-  // Staking sidebar
+  // --- Inline Coverage Gauge ---
+  const coverEl = document.getElementById("coverageInline");
+  if (m.venice && staking.monthlyPayGo > 0) {
+    const cappedPct = Math.min(staking.coveragePct, 100);
+    const gaugeColor = cappedPct >= 100 ? "var(--green)" : cappedPct >= 50 ? "var(--orange)" : "var(--red)";
+    const pctDisplay = staking.coveragePct >= 1000 ? ">999%" : Math.round(staking.coveragePct) + "%";
+
+    coverEl.innerHTML = `
+      <div class="coverage-header">
+        <span class="ch-label">Coverage: ${staking.dailyDiem.toFixed(1)} / ${staking.dailyDiemNeeded.toFixed(1)} DIEM/day</span>
+        <span class="ch-pct" style="color:${gaugeColor}">${pctDisplay}</span>
+      </div>
+      <div class="coverage-bar">
+        <div class="coverage-bar-fill" style="width:${Math.min(cappedPct,100)}%; background:${gaugeColor};"></div>
+      </div>
+      <div class="coverage-detail">
+        <span>Need ${fmt(staking.vvvUsdNeeded)} VVV (${Math.ceil(staking.vvvTokensNeeded).toLocaleString()} tokens)</span>
+        <span>Have ${fmt(parseFloat(document.getElementById("vvvUsd").value))}</span>
+      </div>
+      ${!staking.canCover && !autoMatchActive ? `
+        <div class="coverage-action">
+          <button class="btn btn-primary" onclick="document.getElementById('vvvUsd').value=${Math.ceil(staking.vvvUsdNeeded)};update();">Match to Usage</button>
+        </div>
+      ` : ''}
+    `;
+    coverEl.style.display = "block";
+  } else {
+    coverEl.style.display = "none";
+  }
+
+  // --- Staking Sidebar (slimmed) ---
   const sr = document.getElementById("stakingResult");
   sr.innerHTML = `
     <div class="row"><span class="rlabel">VVV Tokens</span><span>${staking.vvvTokens.toLocaleString("en-US", {maximumFractionDigits: 0})}</span></div>
     <div class="row"><span class="rlabel">Network Share</span><span>${(staking.share * 100).toFixed(4)}%</span></div>
     <div class="row"><span class="rlabel">Daily DIEM</span><span>${staking.dailyDiem.toFixed(2)}</span></div>
     <div class="row"><span class="rlabel">Monthly Compute Value</span><span>${fmt(staking.monthlyCompute)}</span></div>
-    <div class="row"><span class="rlabel">Annual Compute Value</span><span>${fmt(staking.annualCompute)}</span></div>
     <hr class="section-divider">
-    <div class="row"><span class="rlabel">Annual Opportunity Cost</span><span class="positive">${fmt(staking.annualOppCost)}</span></div>
-    <div class="row"><span class="rlabel">Annual Appreciation</span><span class="${staking.annualAppreciation >= 0 ? 'negative' : 'positive'}">${fmt(staking.annualAppreciation)}</span></div>
-    <div class="row"><span class="rlabel"><strong>Effective Annual Cost</strong></span><span class="${staking.effectiveAnnual < 0 ? 'negative' : 'positive'}"><strong>${fmt(staking.effectiveAnnual)}</strong></span></div>
-    <div class="row"><span class="rlabel"><strong>Effective Monthly Cost</strong></span><span class="${staking.effectiveMonthly < 0 ? 'negative' : 'positive'}"><strong>${fmt(staking.effectiveMonthly)}</strong></span></div>
+    <div class="row"><span class="rlabel">Opportunity Cost</span><span class="positive">${fmt(staking.annualOppCost)}/yr</span></div>
+    <div class="row"><span class="rlabel">Expected Appreciation</span><span class="${staking.annualAppreciation >= 0 ? 'negative' : 'positive'}">${fmt(staking.annualAppreciation)}/yr</span></div>
+    <div class="row"><span class="rlabel">Staking Yield (${(staking.stakingApy*100).toFixed(0)}% APY)</span><span class="negative">${fmt(staking.annualYield)}/yr</span></div>
+    <div class="row"><span class="rlabel"><strong>Effective Cost</strong></span><span class="${staking.effectiveAnnual < 0 ? 'negative' : 'positive'}"><strong>${fmt(staking.effectiveMonthly)}/mo</strong> (${fmt(staking.effectiveAnnual)}/yr)</span></div>
   `;
 
-  // Summary cards
+  // --- DIEM Market Purchase ---
+  const dpEl = document.getElementById("diemPurchase");
+  if (m.venice && staking.dailyDiemNeeded > 0) {
+    const diemPriceStr = liveData.diemPrice ? `$${liveData.diemPrice.toFixed(2)} (live)` : `~$${staking.diemMarketPrice.toFixed(0)} (est.)`;
+    dpEl.innerHTML = `
+      <h3>Alternative: Buy DIEM Tokens</h3>
+      <div class="dp-row"><span class="dp-label">DIEM Needed</span><span>${staking.diemTokensNeeded.toFixed(2)} tokens</span></div>
+      <div class="dp-row"><span class="dp-label">DIEM Price</span><span>${diemPriceStr}</span></div>
+      <div class="dp-row"><span class="dp-label">Total Capital</span><span style="font-weight:700;color:var(--blue)">${fmt(staking.diemTotalCost)}</span></div>
+      <div class="dp-row"><span class="dp-label">Eff. Cost (opp cost only)</span><span style="color:var(--orange)">${fmt(staking.diemMonthlyEffCost)}/mo</span></div>
+      <div class="dp-note">Each DIEM = $1/day API credit in perpetuity. No staking yield. One-time purchase on <a href="https://app.aerodrome.finance/" target="_blank" style="color:var(--accent2)">Aerodrome</a>.</div>
+    `;
+    dpEl.style.display = "block";
+  } else {
+    dpEl.style.display = "none";
+  }
+
+  // --- Summary Cards ---
   const sc = document.getElementById("summaryCards");
-  const paygoResult = results.find(r => !r.isStaking);
-  const stakingResult = results.find(r => r.isStaking);
-  const directResult = results.find(r => r.provider.includes("Direct"));
+  const directResult = results.find(r => !r.isStaking && !r.isDiem && r.provider.includes("Direct"));
+  const stakingResultRow = results.find(r => r.isStaking);
+  const diemResult = results.find(r => r.isDiem);
 
   let cards = "";
   if (directResult) {
-    cards += `<div class="summary-card"><div class="val val-blue">${fmt(directResult.monthly)}</div><div class="lbl">${directResult.provider} / month</div></div>`;
+    cards += `<div class="summary-card"><div class="val val-blue">${fmt(directResult.monthly)}</div><div class="lbl">${directResult.provider} / mo</div></div>`;
   }
-  if (paygoResult && paygoResult.provider === "Venice Pay-Go") {
-    cards += `<div class="summary-card"><div class="val val-orange">${fmt(paygoResult.monthly)}</div><div class="lbl">Venice Pay-Go / month</div></div>`;
+  const paygoResult = results.find(r => r.provider === "Venice Pay-Go");
+  if (paygoResult) {
+    cards += `<div class="summary-card"><div class="val val-orange">${fmt(paygoResult.monthly)}</div><div class="lbl">Venice Pay-Go / mo</div></div>`;
   }
-  if (stakingResult) {
-    const cls = stakingResult.monthly < 0 ? "val-green" : "val-red";
-    const note = stakingResult.canCover ? "(covers usage)" : "(insufficient DIEM)";
-    cards += `<div class="summary-card"><div class="val ${cls}">${fmt(stakingResult.monthly)}</div><div class="lbl">DIEM Staking Eff. Cost ${note}</div></div>`;
+  if (stakingResultRow) {
+    const cls = stakingResultRow.monthly < 0 ? "val-green" : "val-red";
+    cards += `<div class="summary-card"><div class="val ${cls}">${fmt(stakingResultRow.monthly)}</div><div class="lbl">VVV Staking Eff. Cost / mo</div></div>`;
   }
-  if (results.length > 1 && directResult && stakingResult && stakingResult.canCover) {
-    const savings = directResult.monthly - stakingResult.monthly;
-    cards += `<div class="summary-card"><div class="val val-green">${fmt(savings)}</div><div class="lbl">Monthly Savings (Staking vs Direct)</div></div>`;
+  if (diemResult) {
+    cards += `<div class="summary-card"><div class="val val-blue">${fmt(diemResult.monthly)}</div><div class="lbl">DIEM Purchase Eff. Cost / mo</div></div>`;
   }
   sc.innerHTML = cards;
 
-  // Staking Requirements Card
-  const reqCard = document.getElementById("stakingReqCard");
-  const reqContent = document.getElementById("stakingReqContent");
-  const m = MODELS[modelSel.value];
-
-  if (m.venice && staking.monthlyPayGo > 0) {
-    reqCard.style.display = "block";
-    const cappedPct = Math.min(staking.coveragePct, 100);
-    const gaugeColor = cappedPct >= 100 ? "var(--green)" : cappedPct >= 50 ? "var(--orange)" : "var(--red)";
-    const statusText = staking.canCover
-      ? `<span style="color:var(--green); font-weight:700">Your current stake covers your usage</span>`
-      : `<span style="color:var(--red); font-weight:700">You need ${fmt(staking.vvvUsdNeeded - parseFloat(document.getElementById("vvvUsd").value))} more in VVV to fully cover usage</span>`;
-
-    // Effective cost comparison: staking at break-even vs pay-go vs direct
-    const beEffAnnual = staking.vvvUsdNeeded * (parseInt(document.getElementById("oppCost").value)/100) - staking.vvvUsdNeeded * (parseInt(document.getElementById("appreciation").value)/100);
-    const beEffMonthly = beEffAnnual / 12;
-
-    let vsHtml = "";
-    if (staking.vvvUsdNeeded > 0) {
-      vsHtml += `<div class="req-vs-row">`;
-      vsHtml += `<div class="req-vs-item"><div class="rv-label">Venice Pay-Go (no staking)</div><div class="rv-val val-orange">${fmt(staking.monthlyPayGo)}<span style="font-size:0.7rem;font-weight:400">/mo</span></div></div>`;
-      vsHtml += `<div class="req-vs-item"><div class="rv-label">Staking Eff. Cost at Break-Even</div><div class="rv-val" style="color:${beEffMonthly <= 0 ? 'var(--green)' : 'var(--text)'}">${fmt(beEffMonthly)}<span style="font-size:0.7rem;font-weight:400">/mo</span></div></div>`;
-      const annualSavings = (staking.monthlyPayGo * 12) - beEffAnnual;
-      vsHtml += `<div class="req-vs-item"><div class="rv-label">Annual Savings from Staking</div><div class="rv-val" style="color:${annualSavings > 0 ? 'var(--green)' : 'var(--red)'}">${fmt(annualSavings)}<span style="font-size:0.7rem;font-weight:400">/yr</span></div></div>`;
-      vsHtml += `</div>`;
-    }
-
-    reqContent.innerHTML = `
-      <div class="req-grid">
-        <div class="req-metric">
-          <div class="rm-val val-accent" style="color:var(--accent2)">${fmt(staking.vvvUsdNeeded)}</div>
-          <div class="rm-lbl">VVV Investment Required</div>
-          <div class="rm-sub">${Math.ceil(staking.vvvTokensNeeded).toLocaleString()} VVV tokens @ ${fmt(staking.vvvPrice)}</div>
-        </div>
-        <div class="req-metric">
-          <div class="rm-val val-blue">${staking.dailyDiemNeeded.toFixed(2)}</div>
-          <div class="rm-lbl">Daily DIEM Needed</div>
-          <div class="rm-sub">${fmt(staking.monthlyPayGo)}/mo in Venice compute</div>
-        </div>
-        <div class="req-metric">
-          <div class="rm-val" style="color:var(--orange)">${(staking.shareNeeded * 100).toFixed(4)}%</div>
-          <div class="rm-lbl">Network Share Needed</div>
-          <div class="rm-sub">of ${(staking.totalStaked/1e6).toFixed(0)}M total staked VVV</div>
-        </div>
-      </div>
-
-      <div class="gauge-wrap">
-        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-          <span style="font-size:0.82rem; font-weight:600;">Your Coverage</span>
-          <span style="font-size:0.82rem; font-weight:700; color:${gaugeColor}">${staking.coveragePct >= 1000 ? '>' : ''}${Math.min(staking.coveragePct, 999).toFixed(0)}%</span>
-        </div>
-        <div class="gauge-bar">
-          <div class="gauge-fill" style="width:${Math.min(cappedPct, 100)}%; background:${gaugeColor};"></div>
-        </div>
-        <div class="gauge-labels">
-          <span>Have: ${staking.dailyDiem.toFixed(2)} DIEM/day (${fmt(staking.monthlyCompute)}/mo)</span>
-          <span>Need: ${staking.dailyDiemNeeded.toFixed(2)} DIEM/day (${fmt(staking.monthlyPayGo)}/mo)</span>
-        </div>
-      </div>
-
-      <div style="margin-top:8px">${statusText}</div>
-      ${vsHtml}
-
-      ${!staking.canCover && staking.vvvUsdNeeded > 0 ? `
-        <div class="req-action">
-          <button class="btn btn-primary" onclick="document.getElementById('vvvUsd').value=${Math.ceil(staking.vvvUsdNeeded)};update();">Set VVV to Break-Even (${fmt(staking.vvvUsdNeeded)})</button>
-          <span class="req-note">Auto-fills the VVV investment field above</span>
-        </div>
-      ` : ''}
-
-      <div class="req-callout">
-        <strong>How to read this:</strong> Your forecasted usage of ${m.display} costs <strong>${fmt(staking.monthlyPayGo)}/mo</strong> via Venice pay-as-you-go.
-        To cover that entirely through staking, you need <strong>${staking.dailyDiemNeeded.toFixed(2)} DIEM/day</strong> of allocation,
-        which requires staking <strong>${Math.ceil(staking.vvvTokensNeeded).toLocaleString()} VVV</strong> (${fmt(staking.vvvUsdNeeded)} at current price).
-        ${staking.diemTokensNeeded > 0 ? `Alternatively, you could buy <strong>${staking.diemTokensNeeded.toFixed(2)} minted DIEM tokens</strong> on secondary markets for the same compute.` : ''}
-      </div>
-    `;
-  } else {
-    reqCard.style.display = "none";
-  }
-
-  // Table
+  // --- Table ---
   const tbody = document.querySelector("#compTable tbody");
   tbody.innerHTML = "";
   results.forEach((r, i) => {
@@ -952,6 +1056,7 @@ function update() {
     let tag = "";
     if (i === 0) tag = `<span class="tag tag-cheapest">Cheapest</span>`;
     else if (r.isStaking) tag = `<span class="tag tag-staking">Staking</span>`;
+    else if (r.isDiem) tag = `<span class="tag tag-diem">DIEM Buy</span>`;
     else if (r.provider === "Venice Pay-Go") tag = `<span class="tag tag-markup">+markup</span>`;
 
     if (r.isStaking && !r.canCover) tag += ` <span class="tag tag-markup">Low DIEM</span>`;
@@ -969,7 +1074,7 @@ function update() {
   drawChart(results);
 }
 
-// ─── Chart ───────────────────────────────────────────────────────────────
+// --- Chart ---
 function drawChart(results) {
   const canvas = document.getElementById("chart");
   const ctx = canvas.getContext("2d");
@@ -995,7 +1100,7 @@ function drawChart(results) {
   const barW = Math.min(60, chartW / results.length - 10);
   const gap = (chartW - barW * results.length) / (results.length + 1);
 
-  const colors = ["#00b894", "#74b9ff", "#fdcb6e", "#e17055", "#a29bfe", "#fd79a8"];
+  const colors = ["#00b894", "#74b9ff", "#fdcb6e", "#e17055", "#a29bfe", "#fd79a8", "#55efc4", "#81ecec"];
   const zeroY = pad.top + chartH * (maxVal / range);
 
   ctx.strokeStyle = "#2e3245"; ctx.lineWidth = 1;
@@ -1042,7 +1147,7 @@ function drawChart(results) {
   ctx.setLineDash([]);
 }
 
-// ─── Export ──────────────────────────────────────────────────────────────
+// --- Export ---
 function exportCSV() {
   const { results, staking } = calcCosts();
   const inM = document.getElementById("inputMtok").value;
@@ -1053,15 +1158,22 @@ function exportCSV() {
   results.forEach(r => {
     csv += `${model},${inM},${outM},${r.provider},${r.monthly.toFixed(2)},${(r.monthly*12).toFixed(2)}\n`;
   });
-  csv += `\nStaking Parameter,Value\n`;
+  csv += `\nStaking Parameters,Value\n`;
   csv += `VVV USD,${document.getElementById("vvvUsd").value}\n`;
   csv += `VVV Price,${document.getElementById("vvvPrice").value}\n`;
   csv += `VVV Price Mode,${priceMode}\n`;
   csv += `Appreciation,${document.getElementById("appreciation").value}%\n`;
   csv += `Opportunity Cost,${document.getElementById("oppCost").value}%\n`;
+  csv += `Staking APY,${document.getElementById("stakingApy").value}%\n`;
   csv += `Monthly Compute Value,${staking.monthlyCompute.toFixed(2)}\n`;
   csv += `Effective Monthly Cost,${staking.effectiveMonthly.toFixed(2)}\n`;
-  if (liveData.fetchedAt) csv += `Live Data Fetched,${liveData.fetchedAt}\n`;
+  csv += `Annual Staking Yield,${staking.annualYield.toFixed(2)}\n`;
+  csv += `\nDIEM Purchase,Value\n`;
+  csv += `DIEM Tokens Needed,${staking.diemTokensNeeded.toFixed(2)}\n`;
+  csv += `DIEM Market Price,${staking.diemMarketPrice.toFixed(2)}\n`;
+  csv += `DIEM Total Capital,${staking.diemTotalCost.toFixed(2)}\n`;
+  csv += `DIEM Eff Monthly Cost,${staking.diemMonthlyEffCost.toFixed(2)}\n`;
+  if (liveData.fetchedAt) csv += `\nLive Data Fetched,${liveData.fetchedAt}\n`;
 
   const blob = new Blob([csv], { type: "text/csv" });
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
@@ -1076,16 +1188,16 @@ function shareLink() {
   p.set("v", document.getElementById("vvvUsd").value);
   p.set("a", document.getElementById("appreciation").value);
   p.set("oc", document.getElementById("oppCost").value);
+  p.set("apy", document.getElementById("stakingApy").value);
+  if (!autoMatchActive) p.set("am", "0");
   p.set("pm", priceMode);
   const url = location.origin + location.pathname + "?" + p.toString();
   navigator.clipboard.writeText(url).then(() => alert("Link copied to clipboard!"));
 }
 
-// ─── Init ────────────────────────────────────────────────────────────────
+// --- Init ---
 window.addEventListener("resize", update);
 update();
-
-// Auto-fetch live data on page load
 fetchLiveData();
 </script>
 </body>
