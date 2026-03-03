@@ -259,6 +259,7 @@
     <div class="nav-external">
       <a href="https://docs.venice.ai/overview/pricing" target="_blank" rel="noopener">API Pricing <span class="ext-icon">&#8599;</span></a>
       <a href="https://venice.ai/token" target="_blank" rel="noopener">Stake VVV <span class="ext-icon">&#8599;</span></a>
+      <button onclick="shareLink()" style="padding:6px 16px; background:var(--venice-red); color:#fff; border:none; border-radius:6px; font-size:0.78rem; font-weight:600; cursor:pointer; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#c42d00'" onmouseout="this.style.background='var(--venice-red)'">Share Link</button>
     </div>
   </nav>
 
@@ -438,6 +439,7 @@ annual_eff_cost = total_diem_cost &times; opportunity_cost_rate
   <div id="page-calculator" class="page active">
   <h1>Venice.ai Cost Comparison</h1>
   <p class="subtitle">Compare Venice pay-as-you-go, DIEM staking, DIEM purchase, and direct provider pricing. All calculations run locally.</p>
+  <p style="color:var(--text-dim); font-size:0.75rem; margin-top:-18px; margin-bottom:20px;">vibe coded by <a href="https://x.com/swillinger" target="_blank" rel="noopener" style="color:var(--venice-red); text-decoration:none;">x.com/swillinger</a> w/ &lt;3 | still a work in progress/not meant for actual capex planning</p>
 
   <div class="grid">
     <!-- LEFT: Usage Inputs -->
@@ -557,7 +559,6 @@ annual_eff_cost = total_diem_cost &times; opportunity_cost_rate
   <!-- Export -->
   <div class="btn-row">
     <button class="btn btn-primary" onclick="exportCSV()">Export CSV</button>
-    <button class="btn btn-secondary" onclick="shareLink()">Copy Share Link</button>
   </div>
 
   </div><!-- /page-calculator -->
