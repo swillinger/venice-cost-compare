@@ -6,25 +6,43 @@
 <title>Venice.ai Cost Comparison Worksheet</title>
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #242736;
-    --border: #2e3245;
-    --text: #e4e6f0;
-    --text-dim: #8b8fa3;
-    --accent: #6c5ce7;
-    --accent2: #a29bfe;
-    --green: #00b894;
-    --red: #e17055;
-    --orange: #fdcb6e;
-    --blue: #74b9ff;
+    --bg: #EEEDE4;
+    --surface: #ffffff;
+    --surface2: #f6f5f0;
+    --border: #ddd9cf;
+    --text: #1a1a1a;
+    --text-dim: #63534B;
+    --accent: #BEA989;
+    --accent2: #a38a64;
+    --green: #2e7d32;
+    --red: #c62828;
+    --orange: #e65100;
+    --blue: #1565c0;
+    --venice-red: #dd3300;
+    --bb-red: #a31e22;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5;
+    position: relative;
   }
-  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  /* Watermark */
+  body::before {
+    content: '';
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 264px;
+    background-image: url("data:image/svg+xml,%3Csvg id='Layer_2' data-name='Layer 2' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 290.86 127.65'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23a31e22%7D%3C/style%3E%3C/defs%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cg%3E%3Cg%3E%3Cpath class='cls-1' d='M14.69,51.48V13.67h21.6v2.71h2.7v2.7h2.7v10.8h-2.7v2.7h2.7v2.71h2.71v10.8h-2.71v2.7h-2.7v2.7H14.69ZM33.59,29.88v-2.7h2.7v-5.41h-2.7v-2.7h-13.52v10.8h13.52ZM36.29,46.09v-2.7h2.7v-5.41h-2.7v-2.7h-16.21v10.8h16.21Z'/%3E%3Cpath class='cls-1' d='M48.09,51.48V13.67h5.39v37.81h-5.39Z'/%3E%3Cpath class='cls-1' d='M62.7,51.48v-2.7h-2.7v-2.7h-2.7v-16.21h2.7v-2.7h2.7v-2.7h13.52v2.7h2.7v2.7h2.7v16.21h-2.7v2.7h-2.7v2.7h-13.52ZM73.5,46.09v-2.7h2.71v-10.82h-2.71v-2.7h-8.1v2.7h-2.7v10.82h2.7v2.7h8.1Z'/%3E%3Cpath class='cls-1' d='M90.57,51.48v-2.7h-2.7v-2.7h-2.7v-16.21h2.7v-2.7h2.7v-2.7h13.52v2.7h2.7v2.7h2.7v5.41h-5.39v-2.71h-2.71v-2.7h-8.11v2.7h-2.7v10.82h2.7v2.7h8.11v-2.7h2.71v-2.71h5.39v5.41h-2.7v2.7h-2.7v2.7h-13.52Z'/%3E%3Cpath class='cls-1' d='M113.12,51.48V13.67h5.39v21.62h2.7v-2.71h2.71v-2.7h2.7v-2.7h2.7v-2.7h6.76v2.7h-2.7v2.7h-2.71v2.7h-2.7v2.71h-2.7v5.39h2.7v2.71h2.7v2.7h2.71v2.7h2.7v2.7h-6.76v-2.7h-2.7v-2.7h-2.7v-2.7h-2.71v-2.71h-2.7v10.8h-5.39Z'/%3E%3Cpath class='cls-1' d='M143.34,51.48v-2.7h-2.7v-2.7h-2.7v-16.21h2.7v-2.7h2.7v-2.7h13.52v2.7h2.7v2.7h2.7v5.41h-5.39v-2.71h-2.71v-2.7h-8.11v2.7h-2.7v10.82h2.7v2.7h8.11v-2.7h2.71v-2.71h5.39v5.41h-2.7v2.7h-2.7v2.7h-13.52Z'/%3E%3Cpath class='cls-1' d='M165.89,51.48V13.67h5.39v13.52h2.7v-2.7h9.45v2.7h2.71v2.7h2.7v21.6h-5.41v-18.91h-2.7v-2.7h-6.76v2.7h-2.7v18.91h-5.39Z'/%3E%3Cpath class='cls-1' d='M197.83,51.48v-2.7h-2.7v-2.7h-2.7v-5.41h2.7v-2.7h5.39v-2.7h10.82v-2.71h-2.71v-2.7h-8.1v2.7h-8.09v-2.7h2.7v-2.7h2.7v-2.7h13.52v2.7h2.7v2.7h2.7v21.6h-5.39v-2.7h-2.71v2.7h-10.8ZM208.63,46.09v-2.7h2.71v-5.41h-2.71v2.7h-9.45v5.41h9.45Z'/%3E%3Cpath class='cls-1' d='M220.67,20.43v-5.39h5.39v5.39h-5.39ZM220.67,51.48v-26.99h5.39v26.99h-5.39Z'/%3E%3Cpath class='cls-1' d='M230.01,51.48v-26.99h5.39v2.7h2.7v-2.7h9.45v2.7h2.71v2.7h2.7v21.6h-5.41v-18.91h-2.7v-2.7h-6.76v2.7h-2.7v18.91h-5.39Z'/%3E%3C/g%3E%3Cg%3E%3Cpolygon class='cls-1' points='224.1 92.11 215.99 92.11 215.99 94.81 213.29 94.81 213.29 97.52 226.81 97.52 226.81 94.81 224.1 94.81 224.1 92.11'/%3E%3Cpolygon class='cls-1' points='122.63 97.52 106.42 97.52 106.42 108.32 122.63 108.32 122.63 105.63 125.33 105.63 125.33 100.22 122.63 100.22 122.63 97.52'/%3E%3Cpolygon class='cls-1' points='119.94 89.42 122.63 89.42 122.63 84.01 119.94 84.01 119.94 81.31 106.42 81.31 106.42 92.11 119.94 92.11 119.94 89.42'/%3E%3Cpolygon class='cls-1' points='196.02 92.11 187.91 92.11 187.91 94.81 185.22 94.81 185.22 105.63 187.91 105.63 187.91 108.32 196.02 108.32 196.02 105.63 198.73 105.63 198.73 94.81 196.02 94.81 196.02 92.11'/%3E%3Cpath class='cls-1' d='M268.07,61.97V0H0v65.68h86.34v61.97h204.52V61.97h-22.79ZM3.82,61.86V3.82h260.44v58.05H3.82ZM130.74,108.32h-2.71v2.7h-2.7v2.7h-24.3v-37.81h21.6v2.71h2.7v2.7h2.7v10.8h-2.7v2.7h2.7v2.71h2.71v10.8ZM157.26,113.71h-5.41v-2.7h-2.7v2.7h-9.45v-2.7h-2.7v-2.7h-2.7v-21.6h5.39v18.91h2.7v2.7h6.76v-2.7h2.7v-18.91h5.41v26.99ZM166.64,113.71h-5.39v-26.99h5.39v26.99ZM166.64,82.66h-5.39v-5.39h5.39v5.39ZM176,113.71h-5.39v-37.81h5.39v37.81ZM204.12,113.71h-5.39v-2.7h-2.71v2.7h-10.8v-2.7h-2.7v-2.7h-2.7v-16.21h2.7v-2.7h2.7v-2.7h10.8v2.7h2.71v-13.52h5.39v37.81ZM232.2,101.56h-18.91v4.06h2.7v2.7h8.1v-2.7h8.11v2.7h-2.7v2.7h-2.7v2.7h-13.52v-2.7h-2.7v-2.7h-2.7v-16.21h2.7v-2.7h2.7v-2.7h13.52v2.7h2.7v2.7h2.7v9.45ZM250.69,92.11h-6.76v2.7h-2.7v18.91h-5.39v-26.99h5.39v2.7h2.7v-2.7h6.76v5.39ZM277.95,94.81h-8.11v-2.7h-9.45v5.41h9.45v2.7h5.41v2.7h2.7v5.41h-2.7v2.7h-2.7v2.7h-13.52v-2.7h-2.7v-2.7h-2.7v-2.7h8.09v2.7h9.45v-5.41h-9.45v-2.7h-5.39v-2.7h-2.7v-5.41h2.7v-2.7h2.7v-2.7h13.52v2.7h2.7v2.7h2.7v2.7Z'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container { position: relative; z-index: 1; }
+
+  h1 { font-size: 1.6rem; margin-bottom: 4px; color: var(--text); }
   h2 { font-size: 1.15rem; margin-bottom: 12px; color: var(--accent2); }
   h3 { font-size: 0.95rem; margin-bottom: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
   .subtitle { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 24px; }
@@ -34,24 +52,25 @@
   .card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 12px; padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   label { display: block; font-size: 0.82rem; color: var(--text-dim); margin-bottom: 4px; }
   select, input[type="number"], input[type="file"] {
     width: 100%; padding: 8px 12px; background: var(--surface2); border: 1px solid var(--border);
     border-radius: 8px; color: var(--text); font-size: 0.9rem; margin-bottom: 12px;
   }
-  select:focus, input:focus { outline: none; border-color: var(--accent); }
-  input[type="range"] { width: 100%; margin: 4px 0 12px; accent-color: var(--accent); }
+  select:focus, input:focus { outline: none; border-color: var(--accent2); }
+  input[type="range"] { width: 100%; margin: 4px 0 12px; accent-color: var(--venice-red); }
   .slider-row { display: flex; justify-content: space-between; align-items: center; }
   .slider-val { font-size: 0.9rem; font-weight: 600; color: var(--accent2); min-width: 60px; text-align: right; }
   .presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
   .presets button {
     padding: 6px 14px; border: 1px solid var(--border); border-radius: 20px;
-    background: var(--surface2); color: var(--text); font-size: 0.8rem; cursor: pointer;
+    background: var(--surface2); color: var(--text-dim); font-size: 0.8rem; cursor: pointer;
     transition: all 0.15s;
   }
   .presets button:hover, .presets button.active {
-    background: var(--accent); border-color: var(--accent); color: #fff;
+    background: var(--venice-red); border-color: var(--venice-red); color: #fff;
   }
   table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
   th { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); color: var(--text-dim); font-weight: 600; }
@@ -62,14 +81,15 @@
     display: inline-block; padding: 2px 8px; border-radius: 10px;
     font-size: 0.72rem; font-weight: 600;
   }
-  .tag-cheapest { background: rgba(0,184,148,0.15); color: var(--green); }
-  .tag-markup { background: rgba(225,112,85,0.15); color: var(--red); }
-  .tag-staking { background: rgba(108,92,231,0.15); color: var(--accent2); }
-  .tag-diem { background: rgba(116,185,255,0.15); color: var(--blue); }
+  .tag-cheapest { background: rgba(46,125,50,0.12); color: var(--green); }
+  .tag-markup { background: rgba(198,40,40,0.1); color: var(--red); }
+  .tag-staking { background: rgba(190,169,137,0.25); color: var(--accent2); }
+  .tag-diem { background: rgba(21,101,192,0.1); color: var(--blue); }
   canvas { width: 100%; height: 250px; margin-top: 12px; }
   .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
   .summary-card {
-    background: var(--surface2); border-radius: 10px; padding: 14px 16px; text-align: center;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   .summary-card .val { font-size: 1.4rem; font-weight: 700; }
   .summary-card .lbl { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
@@ -82,15 +102,15 @@
     padding: 8px 20px; border: none; border-radius: 8px; font-size: 0.85rem;
     cursor: pointer; font-weight: 600; transition: all 0.15s;
   }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--accent2); }
+  .btn-primary { background: var(--venice-red); color: #fff; }
+  .btn-primary:hover { background: #c42d00; }
   .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
-  .btn-secondary:hover { border-color: var(--accent); }
+  .btn-secondary:hover { border-color: var(--accent2); }
   .drop-zone {
     border: 2px dashed var(--border); border-radius: 12px; padding: 30px; text-align: center;
     color: var(--text-dim); cursor: pointer; transition: all 0.2s; margin-bottom: 16px;
   }
-  .drop-zone:hover, .drop-zone.dragover { border-color: var(--accent); color: var(--accent2); }
+  .drop-zone:hover, .drop-zone.dragover { border-color: var(--venice-red); color: var(--venice-red); }
   .staking-result { margin-top: 12px; font-size: 0.85rem; }
   .staking-result .row { display: flex; justify-content: space-between; padding: 4px 0; }
   .staking-result .row .rlabel { color: var(--text-dim); }
@@ -104,11 +124,12 @@
     display: flex; align-items: center; gap: 0;
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 12px; margin-bottom: 24px; overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   .navbar .logo {
     padding: 12px 20px; font-weight: 700; font-size: 1rem;
     white-space: nowrap; border-right: 1px solid var(--border);
-    color: var(--accent2);
+    color: var(--venice-red);
   }
   .nav-links { display: flex; flex: 1; }
   .nav-links a {
@@ -117,7 +138,7 @@
     border-bottom: 2px solid transparent; cursor: pointer;
   }
   .nav-links a:hover { color: var(--text); background: var(--surface2); }
-  .nav-links a.active { color: var(--accent2); border-bottom-color: var(--accent); background: var(--surface2); }
+  .nav-links a.active { color: var(--venice-red); border-bottom-color: var(--venice-red); background: var(--surface2); }
   .nav-external {
     display: flex; align-items: center; gap: 4px; margin-left: auto;
     padding: 0 16px;
@@ -127,7 +148,7 @@
     font-size: 0.78rem; border-radius: 6px; transition: all 0.15s;
     display: flex; align-items: center; gap: 4px;
   }
-  .nav-external a:hover { color: var(--accent2); background: var(--surface2); }
+  .nav-external a:hover { color: var(--venice-red); background: var(--surface2); }
   .nav-external .ext-icon { font-size: 0.7rem; }
   @media (max-width: 768px) {
     .navbar { flex-wrap: wrap; }
@@ -156,7 +177,7 @@
     line-height: 1.8; color: var(--accent2);
   }
   .doc-content .callout {
-    border-left: 3px solid var(--accent); background: rgba(108,92,231,0.08);
+    border-left: 3px solid var(--venice-red); background: rgba(221,51,0,0.05);
     border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0;
   }
   .doc-content .callout p { margin-bottom: 0; }
@@ -165,29 +186,30 @@
     background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
     padding: 14px 18px; margin: 8px 0; text-decoration: none; transition: all 0.15s;
   }
-  .doc-content .link-card:hover { border-color: var(--accent); }
-  .doc-content .link-card .lc-title { color: var(--accent2); font-weight: 600; font-size: 0.9rem; }
+  .doc-content .link-card:hover { border-color: var(--venice-red); }
+  .doc-content .link-card .lc-title { color: var(--venice-red); font-weight: 600; font-size: 0.9rem; }
   .doc-content .link-card .lc-desc { color: var(--text-dim); font-size: 0.78rem; margin-top: 2px; }
   .doc-content .link-card .lc-arrow { color: var(--text-dim); margin-left: auto; font-size: 1.1rem; }
   .doc-content .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
   @media (max-width: 600px) { .doc-content .scenario-grid { grid-template-columns: 1fr; } }
   .doc-content .scenario {
     background: var(--surface2); border-radius: 10px; padding: 14px 16px;
+    border: 1px solid var(--border);
   }
-  .doc-content .scenario .sc-label { font-weight: 600; font-size: 0.85rem; margin-bottom: 4px; }
+  .doc-content .scenario .sc-label { font-weight: 600; font-size: 0.85rem; margin-bottom: 4px; color: var(--text); }
   .doc-content .scenario .sc-detail { color: var(--text-dim); font-size: 0.8rem; }
   .doc-content .scenario .sc-result { margin-top: 6px; font-weight: 600; font-size: 0.85rem; }
 
   /* --- Inline Coverage --- */
   .coverage-inline {
-    background: var(--surface2); border-radius: 10px; padding: 12px 14px; margin-bottom: 12px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 12px;
   }
   .coverage-header {
     display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
   }
   .coverage-header .ch-label { font-size: 0.78rem; font-weight: 600; color: var(--text-dim); }
   .coverage-header .ch-pct { font-size: 0.9rem; font-weight: 700; }
-  .coverage-bar { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+  .coverage-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
   .coverage-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
   .coverage-detail {
     display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;
@@ -200,7 +222,7 @@
     display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
   }
   .auto-match input[type="checkbox"] {
-    width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer;
+    width: 16px; height: 16px; accent-color: var(--venice-red); cursor: pointer;
     margin: 0;
   }
   .auto-match label {
@@ -262,7 +284,7 @@
       <h2>How Staking Works</h2>
       <ol>
         <li><strong>Acquire VVV</strong> &mdash; Purchase on a supported exchange or DEX on Base.</li>
-        <li><strong>Stake</strong> &mdash; Navigate to <a href="https://venice.ai/token" target="_blank" rel="noopener" style="color:var(--accent2)">venice.ai/token</a>, connect your wallet, and stake your VVV tokens.</li>
+        <li><strong>Stake</strong> &mdash; Navigate to <a href="https://venice.ai/token" target="_blank" rel="noopener" style="color:var(--venice-red)">venice.ai/token</a>, connect your wallet, and stake your VVV tokens.</li>
         <li><strong>Use API</strong> &mdash; Your daily DIEM allocation is calculated from your share of total active staked VVV. Use it for any Venice-supported model.</li>
         <li><strong>Earn yield</strong> &mdash; VVV emissions are distributed to stakers continuously.</li>
         <li><strong>Unstake</strong> &mdash; There is a <strong>7-day unstaking period</strong> before tokens are unlocked.</li>
@@ -483,7 +505,7 @@ annual_eff_cost = total_diem_cost &times; opportunity_cost_rate
       <label for="vvvPrice">VVV Token Price (USD) <span id="priceSourceLabel" style="color:var(--accent2);"></span></label>
       <input type="number" id="vvvPrice" value="6.51" min="0.01" step="0.01">
 
-      <label>Total Staked VVV (network-wide) <span style="color:var(--text-dim); font-size:0.72rem;">&mdash; manual input, check <a href="https://venice.ai/token" target="_blank" style="color:var(--accent2)">venice.ai/token</a></span></label>
+      <label>Total Staked VVV (network-wide) <span style="color:var(--text-dim); font-size:0.72rem;">&mdash; manual input, check <a href="https://venice.ai/token" target="_blank" style="color:var(--venice-red)">venice.ai/token</a></span></label>
       <input type="number" id="totalStaked" value="100000000" min="1" step="1000000">
 
       <div class="slider-row">
@@ -559,20 +581,15 @@ function showPage(name) {
 
 // --- Pricing Data (from docs.venice.ai/overview/pricing) ---
 const MODELS = {
-  // Anthropic (Venice + direct)
   "claude-opus-4.6":     { display: "Claude Opus 4.6",       venice: [6.00, 30.00],  anthropic: [5.00, 25.00] },
   "claude-sonnet-4.6":   { display: "Claude Sonnet 4.6",     venice: [3.60, 18.00],  anthropic: [3.00, 15.00] },
   "claude-sonnet-4.5":   { display: "Claude Sonnet 4.5",     venice: [3.75, 18.75],  anthropic: [3.00, 15.00] },
   "claude-haiku-4.5":    { display: "Claude Haiku 4.5",      venice: null,           anthropic: [1.00, 5.00] },
-  // OpenAI (Venice + direct)
   "gpt-4o":              { display: "GPT-4o",                venice: null,           openai: [2.50, 10.00] },
   "gpt-5.2":             { display: "GPT-5.2",               venice: [2.19, 17.50],  openai: [1.75, 14.00] },
-  // Google (Venice + direct)
   "gemini-3-pro":        { display: "Gemini 3 Pro",          venice: [2.50, 15.00],  google: [1.25, 10.00] },
   "gemini-3-flash":      { display: "Gemini 3 Flash",        venice: [0.70, 3.75],   google: [0.15, 0.60] },
-  // xAI
   "grok-4.1-fast":       { display: "Grok 4.1 Fast",         venice: [0.50, 1.25] },
-  // Venice-only open models
   "deepseek-v3.2":       { display: "DeepSeek V3.2",         venice: [0.40, 1.00] },
   "qwen-3-coder-480b":   { display: "Qwen 3 Coder 480B",    venice: [0.75, 3.00] },
   "kimi-k2-thinking":    { display: "Kimi K2 Thinking",      venice: [0.75, 3.20] },
@@ -596,7 +613,7 @@ let liveData = {
 };
 let priceMode = "spot";
 let autoMatchActive = true;
-let suppressAutoMatch = false; // prevent loops when auto-match sets VVV
+let suppressAutoMatch = false;
 
 // --- CoinGecko Fetch ---
 async function fetchLiveData() {
@@ -635,7 +652,6 @@ async function fetchLiveData() {
     liveData.low30d = Math.min(...prices);
     liveData.high30d = Math.max(...prices);
 
-    // DIEM token data
     if (diemResp.ok) {
       const diemData = await diemResp.json();
       if (diemData.diem) {
@@ -651,7 +667,7 @@ async function fetchLiveData() {
     const diemNote = liveData.diemPrice ? ` | DIEM: $${liveData.diemPrice.toFixed(2)}` : "";
     status.innerHTML = `<span style="color:var(--green)">Updated ${liveData.fetchedAt} via CoinGecko${diemNote}</span>`;
   } catch (err) {
-    const hint = !cgKey ? ' Get a free key at <a href="https://www.coingecko.com/en/api" target="_blank" style="color:var(--accent2)">coingecko.com/en/api</a> and paste it above.' : '';
+    const hint = !cgKey ? ' Get a free key at <a href="https://www.coingecko.com/en/api" target="_blank" style="color:var(--venice-red)">coingecko.com/en/api</a> and paste it above.' : '';
     status.innerHTML = `<span style="color:var(--red)">Failed: ${err.message}.${hint} Using manual price.</span>`;
   }
 
@@ -720,7 +736,7 @@ function renderLiveMarketData() {
   }
 
   el.innerHTML = `
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; font-size:0.78rem; background:var(--surface2); border-radius:8px; padding:10px 14px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; font-size:0.78rem; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:10px 14px;">
       <div><span style="color:var(--text-dim)">VVV Spot</span> <strong>$${liveData.spot.toFixed(4)}</strong></div>
       <div><span style="color:var(--text-dim)">24h</span> <strong style="color:${chgColor}">${chgSign}${liveData.change24h.toFixed(2)}%</strong></div>
       <div><span style="color:var(--text-dim)">7d MA</span> <strong>$${liveData.ma7d.toFixed(4)}</strong></div>
@@ -740,7 +756,6 @@ Object.entries(MODELS).forEach(([k, m]) => {
 });
 modelSel.value = "claude-sonnet-4.6";
 
-// Load from URL params
 const params = new URLSearchParams(location.search);
 if (params.get("m")) modelSel.value = params.get("m");
 if (params.get("i")) document.getElementById("inputMtok").value = params.get("i");
@@ -753,21 +768,17 @@ if (params.get("am") === "0") { document.getElementById("autoMatch").checked = f
 if (params.get("pm")) { priceMode = params.get("pm"); setPriceMode(priceMode); }
 
 // --- Event Listeners ---
-["model","vvvPrice","totalStaked","appreciation","oppCost","stakingApy"].forEach(id => {
+["vvvPrice","totalStaked","appreciation","oppCost","stakingApy"].forEach(id => {
   document.getElementById(id).addEventListener("input", update);
 });
 
-// Usage inputs trigger auto-match
 ["inputMtok","outputMtok","model"].forEach(id => {
   document.getElementById(id).addEventListener("input", () => {
-    if (autoMatchActive && !suppressAutoMatch) {
-      autoMatchVVV();
-    }
+    if (autoMatchActive && !suppressAutoMatch) autoMatchVVV();
     update();
   });
 });
 
-// VVV USD manual edit — only recalc, don't auto-match
 document.getElementById("vvvUsd").addEventListener("input", () => {
   if (!suppressAutoMatch) update();
 });
@@ -879,7 +890,6 @@ function calcCosts() {
     results.push({ provider: "Venice Pay-Go", monthly: inM * m.venice[0] + outM * m.venice[1] });
   }
 
-  // Direct providers + OpenRouter
   const providers = [
     { key: "anthropic", label: "Anthropic Direct" },
     { key: "openai", label: "OpenAI Direct" },
@@ -893,7 +903,6 @@ function calcCosts() {
     }
   }
 
-  // Staking
   const vvvUsd = parseFloat(document.getElementById("vvvUsd").value) || 0;
   const vvvPrice = parseFloat(document.getElementById("vvvPrice").value) || 6.51;
   const totalStaked = parseFloat(document.getElementById("totalStaked").value) || 100000000;
@@ -907,14 +916,12 @@ function calcCosts() {
   const monthlyCompute = dailyDiem * 30;
   const annualCompute = dailyDiem * 365;
 
-  // Effective cost now includes staking APY as an offset
   const annualOppCost = vvvUsd * oppCost;
   const annualAppreciation = vvvUsd * appreciation;
   const annualYield = vvvUsd * stakingApy;
   const effectiveAnnual = annualOppCost - annualAppreciation - annualYield;
   const effectiveMonthly = effectiveAnnual / 12;
 
-  // Break-even requirements
   const monthlyPayGo = m.venice ? (inM * m.venice[0] + outM * m.venice[1]) : 0;
   const dailyDiemNeeded = monthlyPayGo / 30;
   const shareNeeded = dailyDiemNeeded / DIEM_DAILY;
@@ -922,11 +929,10 @@ function calcCosts() {
   const vvvUsdNeeded = vvvTokensNeeded * vvvPrice;
   const coveragePct = dailyDiemNeeded > 0 ? (dailyDiem / dailyDiemNeeded) * 100 : (vvvUsd > 0 ? Infinity : 0);
 
-  // DIEM market purchase option
-  const diemTokensNeeded = dailyDiemNeeded; // 1 DIEM = $1/day
-  const diemMarketPrice = liveData.diemPrice || 725; // fallback estimate
+  const diemTokensNeeded = dailyDiemNeeded;
+  const diemMarketPrice = liveData.diemPrice || 725;
   const diemTotalCost = diemTokensNeeded * diemMarketPrice;
-  const diemAnnualEffCost = diemTotalCost * oppCost; // no yield, just opp cost
+  const diemAnnualEffCost = diemTotalCost * oppCost;
   const diemMonthlyEffCost = diemAnnualEffCost / 12;
 
   const staking = {
@@ -991,7 +997,7 @@ function update() {
     coverEl.style.display = "none";
   }
 
-  // --- Staking Sidebar (slimmed) ---
+  // --- Staking Sidebar ---
   const sr = document.getElementById("stakingResult");
   sr.innerHTML = `
     <div class="row"><span class="rlabel">VVV Tokens</span><span>${staking.vvvTokens.toLocaleString("en-US", {maximumFractionDigits: 0})}</span></div>
@@ -1015,7 +1021,7 @@ function update() {
       <div class="dp-row"><span class="dp-label">DIEM Price</span><span>${diemPriceStr}</span></div>
       <div class="dp-row"><span class="dp-label">Total Capital</span><span style="font-weight:700;color:var(--blue)">${fmt(staking.diemTotalCost)}</span></div>
       <div class="dp-row"><span class="dp-label">Eff. Cost (opp cost only)</span><span style="color:var(--orange)">${fmt(staking.diemMonthlyEffCost)}/mo</span></div>
-      <div class="dp-note">Each DIEM = $1/day API credit in perpetuity. No staking yield. One-time purchase on <a href="https://app.aerodrome.finance/" target="_blank" style="color:var(--accent2)">Aerodrome</a>.</div>
+      <div class="dp-note">Each DIEM = $1/day API credit in perpetuity. No staking yield. One-time purchase on <a href="https://app.aerodrome.finance/" target="_blank" style="color:var(--venice-red)">Aerodrome</a>.</div>
     `;
     dpEl.style.display = "block";
   } else {
@@ -1100,16 +1106,16 @@ function drawChart(results) {
   const barW = Math.min(60, chartW / results.length - 10);
   const gap = (chartW - barW * results.length) / (results.length + 1);
 
-  const colors = ["#00b894", "#74b9ff", "#fdcb6e", "#e17055", "#a29bfe", "#fd79a8", "#55efc4", "#81ecec"];
+  const colors = ["#2e7d32", "#1565c0", "#BEA989", "#dd3300", "#a31e22", "#63534B", "#e65100", "#78787d"];
   const zeroY = pad.top + chartH * (maxVal / range);
 
-  ctx.strokeStyle = "#2e3245"; ctx.lineWidth = 1;
+  ctx.strokeStyle = "#ddd9cf"; ctx.lineWidth = 1;
   const steps = 5;
   for (let i = 0; i <= steps; i++) {
     const v = minVal + (range / steps) * i;
     const y = pad.top + chartH - (chartH * (v - minVal) / range);
     ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
-    ctx.fillStyle = "#8b8fa3"; ctx.font = "11px sans-serif"; ctx.textAlign = "right";
+    ctx.fillStyle = "#63534B"; ctx.font = "11px sans-serif"; ctx.textAlign = "right";
     ctx.fillText("$" + v.toLocaleString("en-US", { maximumFractionDigits: 0 }), pad.left - 8, y + 4);
   }
 
@@ -1134,15 +1140,15 @@ function drawChart(results) {
     }
     ctx.closePath(); ctx.fill();
 
-    ctx.fillStyle = "#e4e6f0"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "center";
+    ctx.fillStyle = "#1a1a1a"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "center";
     ctx.fillText(fmt(r.monthly), x + barW / 2, r.monthly >= 0 ? y - 6 : y + barH + 14);
 
-    ctx.fillStyle = "#8b8fa3"; ctx.font = "10px sans-serif";
+    ctx.fillStyle = "#63534B"; ctx.font = "10px sans-serif";
     ctx.save(); ctx.translate(x + barW / 2, H - pad.bottom + 12); ctx.rotate(-0.4);
     ctx.fillText(r.provider, 0, 0); ctx.restore();
   });
 
-  ctx.strokeStyle = "#8b8fa3"; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = "#63534B"; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
   ctx.beginPath(); ctx.moveTo(pad.left, zeroY); ctx.lineTo(W - pad.right, zeroY); ctx.stroke();
   ctx.setLineDash([]);
 }
