@@ -613,12 +613,18 @@ const OR_FEE = 0.055;
 const DIEM_DAILY = 18148;
 
 // --- Live Data State ---
+const LIVE_DATA_KEY = "vcc_liveData";
 let liveData = {
   spot: null, ma7d: null, ma30d: null, low30d: null, high30d: null,
   marketCap: null, volume24h: null, change24h: null, circulatingSupply: null,
   diemPrice: null, diemMarketCap: null, diemChange24h: null,
-  fetchedAt: null
+  fetchedAt: null, source: null
 };
+// Restore cached price data from previous session
+try {
+  const cached = JSON.parse(localStorage.getItem(LIVE_DATA_KEY));
+  if (cached && cached.spot) { Object.assign(liveData, cached); }
+} catch(e) {}
 let priceMode = "spot";
 let autoMatchActive = true;
 let suppressAutoMatch = false;
@@ -698,15 +704,25 @@ async function fetchLiveData() {
       }
       source = "DexScreener";
     } catch (dsErr) {
-      status.innerHTML = `<span style="color:var(--red)">Failed to fetch prices (${cgErr.message}). Using manual price.</span>`;
+      // Both APIs failed — try restoring from cache
+      if (liveData.spot && liveData.fetchedAt) {
+        applyPriceMode();
+        renderLiveMarketData();
+        status.innerHTML = `<span style="color:#BEA989">CoinGecko free API rate limit reached. Using last known price ($${liveData.spot.toFixed(2)} from ${liveData.fetchedAt}${liveData.source ? " via " + liveData.source : ""})</span>`;
+      } else {
+        status.innerHTML = `<span style="color:var(--red)">CoinGecko free API rate limit reached. No cached data available — using manual price.</span>`;
+      }
       btn.textContent = "Retry"; btn.disabled = false;
       return;
     }
   }
 
   liveData.fetchedAt = new Date().toLocaleTimeString();
+  liveData.source = source;
   applyPriceMode();
   renderLiveMarketData();
+  // Cache successful fetch to localStorage
+  try { localStorage.setItem(LIVE_DATA_KEY, JSON.stringify(liveData)); } catch(e) {}
   const diemNote = liveData.diemPrice ? ` | DIEM: $${liveData.diemPrice.toFixed(2)}` : "";
   status.innerHTML = `<span style="color:var(--green)">Updated ${liveData.fetchedAt} via ${source}${diemNote}</span>`;
   btn.textContent = "Refresh"; btn.disabled = false;
@@ -1233,6 +1249,13 @@ function shareOnX() {
 
 // --- Init ---
 window.addEventListener("resize", update);
+// Apply cached price data immediately if available
+if (liveData.spot) {
+  applyPriceMode();
+  renderLiveMarketData();
+  const st = document.getElementById("liveStatus");
+  if (st) st.innerHTML = `<span style="color:#BEA989">Cached: $${liveData.spot.toFixed(2)} from ${liveData.fetchedAt || "previous session"}${liveData.source ? " via " + liveData.source : ""} — refreshing...</span>`;
+}
 if (autoMatchActive) autoMatchVVV();
 update();
 fetchLiveData();
