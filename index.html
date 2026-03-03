@@ -259,7 +259,7 @@
     <div class="nav-external">
       <a href="https://docs.venice.ai/overview/pricing" target="_blank" rel="noopener">API Pricing <span class="ext-icon">&#8599;</span></a>
       <a href="https://venice.ai/token" target="_blank" rel="noopener">Stake VVV <span class="ext-icon">&#8599;</span></a>
-      <button onclick="shareLink()" style="padding:6px 16px; background:var(--venice-red); color:#fff; border:none; border-radius:6px; font-size:0.78rem; font-weight:600; cursor:pointer; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#c42d00'" onmouseout="this.style.background='var(--venice-red)'">Share Link</button>
+      <button onclick="shareOnX()" style="padding:6px 16px; background:var(--venice-red); color:#fff; border:none; border-radius:6px; font-size:0.78rem; font-weight:600; cursor:pointer; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#c42d00'" onmouseout="this.style.background='var(--venice-red)'">Share</button>
     </div>
   </nav>
 
@@ -1194,19 +1194,10 @@ function exportCSV() {
   a.download = "venice_comparison.csv"; a.click();
 }
 
-function shareLink() {
-  const p = new URLSearchParams();
-  p.set("m", modelSel.value);
-  p.set("i", document.getElementById("inputMtok").value);
-  p.set("o", document.getElementById("outputMtok").value);
-  p.set("v", document.getElementById("vvvUsd").value);
-  p.set("a", document.getElementById("appreciation").value);
-  p.set("oc", document.getElementById("oppCost").value);
-  p.set("apy", document.getElementById("stakingApy").value);
-  if (!autoMatchActive) p.set("am", "0");
-  p.set("pm", priceMode);
-  const url = location.origin + location.pathname + "?" + p.toString();
-  navigator.clipboard.writeText(url).then(() => alert("Link copied to clipboard!"));
+function shareOnX() {
+  const tweetUrl = "https://x.com/swillinger/status/2028717942138085724";
+  const quoteUrl = "https://x.com/intent/tweet?url=" + encodeURIComponent(tweetUrl);
+  window.open(quoteUrl, "_blank", "width=600,height=400");
 }
 
 // --- Init ---
