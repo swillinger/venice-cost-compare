@@ -259,7 +259,7 @@
     <div class="nav-external">
       <a href="https://docs.venice.ai/overview/pricing" target="_blank" rel="noopener">API Pricing <span class="ext-icon">&#8599;</span></a>
       <a href="https://venice.ai/token" target="_blank" rel="noopener">Stake VVV <span class="ext-icon">&#8599;</span></a>
-      <button onclick="shareOnX()" style="padding:6px 16px; background:var(--venice-red); color:#fff; border:none; border-radius:6px; font-size:0.78rem; font-weight:600; cursor:pointer; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#c42d00'" onmouseout="this.style.background='var(--venice-red)'">Share</button>
+      <button onclick="shareOnX()" style="padding:6px 16px; background:var(--venice-red); color:#fff; border:none; border-radius:6px; font-size:0.78rem; font-weight:600; cursor:pointer; white-space:nowrap; transition:background 0.15s; display:flex; align-items:center; gap:5px;" onmouseover="this.style.background='#c42d00'" onmouseout="this.style.background='var(--venice-red)'">Share <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></button>
     </div>
   </nav>
 
@@ -623,30 +623,34 @@ let priceMode = "spot";
 let autoMatchActive = true;
 let suppressAutoMatch = false;
 
-// --- CoinGecko Fetch ---
+// --- Live Price Fetch (CoinGecko → DexScreener fallback) ---
 async function fetchLiveData() {
   const btn = document.getElementById("btnRefresh");
   const status = document.getElementById("liveStatus");
   btn.textContent = "Fetching..."; btn.disabled = true;
-  status.textContent = "Connecting to CoinGecko...";
+  status.textContent = "Fetching live prices...";
 
-  const cgKey = (document.getElementById("cgApiKey") || {}).value || "";
-  const headers = cgKey ? { "x-cg-demo-api-key": cgKey } : {};
-  const kp = cgKey ? `&x_cg_demo_api_key=${encodeURIComponent(cgKey)}` : "";
+  let source = "";
 
+  // Try CoinGecko first
   try {
+    const cgKey = (document.getElementById("cgApiKey") || {}).value || "";
+    const headers = cgKey ? { "x-cg-demo-api-key": cgKey } : {};
+    const kp = cgKey ? `&x_cg_demo_api_key=${encodeURIComponent(cgKey)}` : "";
+
     const [priceResp, chartResp, diemResp] = await Promise.all([
       fetch("https://api.coingecko.com/api/v3/simple/price?ids=venice-token&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true" + kp, { headers }),
       fetch("https://api.coingecko.com/api/v3/coins/venice-token/market_chart?vs_currency=usd&days=30" + kp, { headers }),
       fetch("https://api.coingecko.com/api/v3/simple/price?ids=diem&vs_currencies=usd&include_market_cap=true&include_24hr_change=true" + kp, { headers })
     ]);
 
-    if (!priceResp.ok || !chartResp.ok) throw new Error("API returned " + priceResp.status);
+    if (!priceResp.ok || !chartResp.ok) throw new Error("CoinGecko returned " + priceResp.status);
 
     const priceData = await priceResp.json();
     const chartData = await chartResp.json();
 
     const vt = priceData["venice-token"];
+    if (!vt || !vt.usd) throw new Error("No VVV data from CoinGecko");
     const prices = chartData.prices.map(p => p[1]);
 
     liveData.spot = vt.usd;
@@ -668,17 +672,43 @@ async function fetchLiveData() {
         liveData.diemChange24h = diemData.diem.usd_24h_change;
       }
     }
-
-    liveData.fetchedAt = new Date().toLocaleTimeString();
-    applyPriceMode();
-    renderLiveMarketData();
-    const diemNote = liveData.diemPrice ? ` | DIEM: $${liveData.diemPrice.toFixed(2)}` : "";
-    status.innerHTML = `<span style="color:var(--green)">Updated ${liveData.fetchedAt} via CoinGecko${diemNote}</span>`;
-  } catch (err) {
-    const hint = !cgKey ? ' Get a free key at <a href="https://www.coingecko.com/en/api" target="_blank" style="color:var(--venice-red)">coingecko.com/en/api</a> and paste it above.' : '';
-    status.innerHTML = `<span style="color:var(--red)">Failed: ${err.message}.${hint} Using manual price.</span>`;
+    source = "CoinGecko";
+  } catch (cgErr) {
+    // Fallback: DexScreener (VVV on Base)
+    try {
+      status.textContent = "CoinGecko unavailable, trying DexScreener...";
+      const dsResp = await fetch("https://api.dexscreener.com/latest/dex/tokens/0xacfE6019Ed1A7Dc6f7B508C02d1b04ec88cC21bf");
+      if (!dsResp.ok) throw new Error("DexScreener returned " + dsResp.status);
+      const dsData = await dsResp.json();
+      const pairs = dsData.pairs;
+      if (pairs && pairs.length > 0) {
+        // Pick the highest-liquidity pair
+        const best = pairs.sort((a, b) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0))[0];
+        liveData.spot = parseFloat(best.priceUsd);
+        liveData.change24h = best.priceChange?.h24 || 0;
+        liveData.volume24h = best.volume?.h24 || 0;
+        liveData.marketCap = best.marketCap || best.fdv || 0;
+        // No 7d/30d moving averages from DexScreener
+        liveData.ma7d = liveData.spot;
+        liveData.ma30d = liveData.spot;
+        liveData.low30d = liveData.spot;
+        liveData.high30d = liveData.spot;
+      } else {
+        throw new Error("No VVV pairs found");
+      }
+      source = "DexScreener";
+    } catch (dsErr) {
+      status.innerHTML = `<span style="color:var(--red)">Failed to fetch prices (${cgErr.message}). Using manual price.</span>`;
+      btn.textContent = "Retry"; btn.disabled = false;
+      return;
+    }
   }
 
+  liveData.fetchedAt = new Date().toLocaleTimeString();
+  applyPriceMode();
+  renderLiveMarketData();
+  const diemNote = liveData.diemPrice ? ` | DIEM: $${liveData.diemPrice.toFixed(2)}` : "";
+  status.innerHTML = `<span style="color:var(--green)">Updated ${liveData.fetchedAt} via ${source}${diemNote}</span>`;
   btn.textContent = "Refresh"; btn.disabled = false;
 }
 
@@ -1196,8 +1226,9 @@ function exportCSV() {
 
 function shareOnX() {
   const tweetUrl = "https://x.com/swillinger/status/2028717942138085724";
-  const quoteUrl = "https://x.com/intent/tweet?url=" + encodeURIComponent(tweetUrl);
-  window.open(quoteUrl, "_blank", "width=600,height=400");
+  const text = "\n" + tweetUrl;
+  const intentUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text);
+  window.open(intentUrl, "_blank");
 }
 
 // --- Init ---
