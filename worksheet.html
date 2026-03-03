@@ -498,9 +498,7 @@ annual_eff_cost = total_diem_cost &times; opportunity_cost_rate
           <button onclick="setPriceMode('manual')" id="pm-manual">Manual</button>
         </div>
       </div>
-      <div style="margin-bottom:8px;">
-        <input type="text" id="cgApiKey" placeholder="CoinGecko API key (free at coingecko.com/en/api)" style="width:100%; padding:6px 10px; background:var(--surface2); border:1px solid var(--border); border-radius:6px; color:var(--text); font-size:0.75rem; margin-bottom:0;">
-      </div>
+      <input type="hidden" id="cgApiKey" value="">
       <div id="liveStatus" style="font-size:0.78rem; color:var(--text-dim); margin-bottom:8px;"></div>
       <div id="liveMarketData" style="display:none; margin-bottom:12px;"></div>
 
@@ -1213,6 +1211,7 @@ function shareLink() {
 
 // --- Init ---
 window.addEventListener("resize", update);
+if (autoMatchActive) autoMatchVVV();
 update();
 fetchLiveData();
 </script>
